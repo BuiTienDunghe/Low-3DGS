@@ -7,6 +7,9 @@
 #
 #  Ý nghĩa từng số: xem docs/VERSIONING.md.
 #  Nhắc lại phần dễ nhầm nhất: RÚT LẠI một phát biểu là MAJOR, không phải PATCH.
+#
+#  Ghi chú: Git Bash trên Windows có `python` nhưng KHÔNG có `python3`.
+#  Và nếu hỏng giữa chừng thì script tự hoàn tác — không để lại trạng thái nửa vời.
 # =============================================================================
 set -euo pipefail
 
@@ -14,10 +17,20 @@ ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 cd "$ROOT"
 
 KIND=${1:-}; DESC=${2:-}
-case "$KIND" in major|minor|patch) ;; *) echo "Dùng: $0 <major|minor|patch> \"<mô tả>\""; exit 2 ;; esac
+case "$KIND" in
+  major|minor|patch) ;;
+  *) echo "Dùng: $0 <major|minor|patch> \"<mô tả>\""; exit 2 ;;
+esac
 [ -n "$DESC" ] || { echo "Thiếu mô tả."; exit 2; }
 
-[ -z "$(git status --porcelain)" ] || { echo "✗ Cây làm việc bẩn. Commit hoặc stash trước đã."; git status --short; exit 1; }
+PY=$(command -v python3 2>/dev/null || command -v python 2>/dev/null || true)
+[ -n "$PY" ] || { echo "✗ không tìm thấy python (cần để sửa CHANGELOG)"; exit 1; }
+
+if [ -n "$(git status --porcelain)" ]; then
+  echo "✗ Cây làm việc bẩn. Commit hoặc stash trước đã."
+  git status --short
+  exit 1
+fi
 
 CUR=$(cat VERSION)
 IFS=. read -r MA MI PA <<< "$CUR"
@@ -27,13 +40,21 @@ case "$KIND" in
   patch) PA=$((PA+1)) ;;
 esac
 NEW="$MA.$MI.$PA"
-TODAY=$(date +%F)
 
 echo "$CUR  ->  $NEW   ($KIND)"
+
+# Hoàn tác nguyên tử nếu bất kỳ bước nào hỏng.
+rollback() {
+  if [ "${DONE:-0}" != 1 ]; then
+    git checkout -- VERSION CHANGELOG.md 2>/dev/null || true
+    echo "  (có lỗi — đã hoàn tác, không đổi gì)"
+  fi
+}
+trap rollback EXIT
+
 printf '%s\n' "$NEW" > VERSION
 
-# chèn mục mới ngay TRƯỚC mục phát hành gần nhất
-python3 - "$NEW" "$TODAY" "$DESC" <<'PY'
+"$PY" - "$NEW" "$(date +%F)" "$DESC" <<'PY'
 import io, re, sys
 new, today, desc = sys.argv[1], sys.argv[2], sys.argv[3]
 p = "CHANGELOG.md"
@@ -51,6 +72,7 @@ git commit -q -m "chore(release): v$NEW
 
 $DESC"
 git tag -a "v$NEW" -m "v$NEW — $DESC"
+DONE=1
 echo "  ✓ đã commit và tạo tag v$NEW"
 echo
 echo "Đẩy lên bằng:  git push --follow-tags"
