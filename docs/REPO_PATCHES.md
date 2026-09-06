@@ -55,6 +55,29 @@ của Mersenne Twister với `seed(0)`. Nhờ vậy **EXP-014/016/017 vẫn hợ
 
 ---
 
+## 2b. Cho phép TẮT anneal learning rate (2026-09-07, EXP-024)
+
+**File:** `prune_finetune.py`, trong vòng lặp huấn luyện
+
+PUP tạo `ExponentialLR(gamma=0.95)` (dòng 81) và gọi `scheduler.step()` **mỗi 400 bước**
+(12 lần trong 5000 bước → LR cuối = **0.54×** LR đầu). **3DGS gốc KHÔNG anneal**
+`feature_lr / opacity_lr / scaling_lr / rotation_lr` trong 30k bước đầu — chỉ `xyz` có lịch riêng.
+
+Nghi vấn cần kiểm: **C1 = +0.3587 dB có thể là phần thưởng MỘT LẦN của anneal**, chứ không phải
+"checkpoint chưa hội tụ" như dự án đang phát biểu. Hai cách hiểu suy rộng ngược chiều nhau, và
+không phép đo nào hiện có phân biệt được chúng.
+
+```diff
+-        if lr_iter % 400 == 0:
++        if lr_iter % 400 == 0 and os.environ.get("L3DGS_NO_ANNEAL") != "1":
+             gaussians.scheduler.step()
+```
+
+**Tương thích ngược tuyệt đối:** không đặt `L3DGS_NO_ANNEAL` → hành vi y hệt bản gốc,
+nên EXP-014..023 vẫn hợp lệ. `os` đã được import sẵn trong file.
+
+---
+
 ## 3. CHƯA sửa, nhưng đã biết là có vấn đề
 
 Ghi lại để không quên, và vì bản thân chúng là kết quả nghiên cứu.

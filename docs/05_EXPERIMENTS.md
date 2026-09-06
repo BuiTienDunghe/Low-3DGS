@@ -222,6 +222,88 @@ Chỉ giữ throttle thật (nhiệt / nguồn / HW slowdown).
 
 ---
 
+### EXP-023 — 🔑 **ĐIỂM DỪNG LÀ MỘT ATTRACTOR.** Phải đọc lại C1 và C2 theo cách khác
+**Ngày:** 2026-09-07 · **Nguồn:** phân tích lại dữ liệu đã có, **không chạy thêm lần nào**
+**Phát hiện bởi:** workflow phản biện thiết kế thí nghiệm exp017 — nó bác luôn thí nghiệm đó
+
+**Quan sát.** Gộp mọi lần chạy trên `train`, ghép cặp "điểm xuất phát → điểm dừng":
+
+| cắt | xuất phát | điểm dừng | phục hồi |
+|---|---|---|---|
+| 0% (checkpoint gốc) | 21.8157 | 22.1799 / 22.1167 / 22.2266 | +0.36 |
+| 20% | 21.8144 | **22.1757** | +0.3613 |
+| 40% | 21.7463 | **22.1663** | +0.4200 |
+| 50% | 21.5694 | **22.1787** | +0.6093 |
+| 60% | 21.1379 | **22.1308** | +0.9928 |
+| 66% | 20.6676 | **22.0764** | +1.4089 |
+| 70% | 20.2556 | **22.0118** | +1.7563 |
+| 80% | 18.8438 | 21.6612 | +2.8174 |
+| 90% | 16.7321 | 20.8177 | +4.0856 |
+| 95% | 15.1066 | 19.7303 | +4.6236 |
+
+**Nhóm 20–70%: điểm xuất phát trải 1.5588 dB, điểm dừng chỉ trải 0.1668 dB — co lại 9.3 lần.**
+Trung bình điểm dừng của 9 lần chạy ở N ≥ 513k: **22.1762 ± 0.0305 dB**.
+Từ 80% trở đi attractor gãy (21.66 / 20.82 / 19.73).
+
+→ **Công thức tinh chỉnh này kéo mọi thứ về cùng một điểm dừng, gần như bất kể xuất phát từ đâu,
+miễn là còn trong miền hút.**
+
+#### Ba con số phải đọc lại
+
+**1. C1 không phải "giá trị của việc luyện thêm".**
+```
+attractor 22.1762 − checkpoint gốc 21.8157 = 0.3605
+C1 đo được                                 = 0.3587   (khớp trong SD 0.0305)
+```
+C1 chỉ là **khoảng cách từ checkpoint công bố tới điểm dừng của công thức này**.
+Không phải "train thêm thì tốt lên" — mà "checkpoint gốc chưa nằm ở chỗ công thức này đưa nó tới".
+
+**2. "Nén 50% miễn phí" có lời giải thích đơn giản hơn.**
+Chi phí đo được +0.0080; SD của chính attractor là 0.0305. Con số đó **nằm trong nhiễu của attractor**.
+Hai nhánh bằng nhau không phải vì nén vô hại, mà vì **cả hai rơi về cùng một điểm dừng**.
+
+**3. Điều này giải thích luôn ĐẦU GỐI.** Vùng "gần như miễn phí" chính là **miền hút của attractor**;
+cắt sâu quá thì văng ra khỏi miền đó. Đầu gối không phải ngưỡng của "thông tin bị mất" mà là
+**biên của miền hút** — một phát biểu cơ chế, kiểm được, thay cho một quan sát.
+
+**4. Chênh 7.6× ở `truck-864k` có lời giải tầm thường hơn.** Model đó **chính là đầu ra** của cùng
+công thức nên đã nằm sẵn trên attractor của nó; liều thứ hai mua gần như không gì.
+Đó không phải "đã hội tụ" theo nghĩa tổng quát mà là **công thức này gần như luỹ đẳng**.
+
+#### 🔴 Hệ quả: thí nghiệm exp017 bị BÁC BỎ TRƯỚC KHI CHẠY
+
+Kế hoạch trước đó (chạy lại nhánh đối chứng trên `exp017_train_noprune@35000`) hỏng vì hai lẽ:
+- Model đó **đã nằm trên attractor** (22.1736, lệch attractor 0.0026) ⇒ C1′ ≈ **0.003**, biết trước
+  từ dữ liệu đã có. 45 phút GPU mua ~0 thông tin.
+- Với n=3, nửa KTC 95% = 4.303 × 0.0551/√3 = **±0.137 dB**, **rộng hơn cả dải dự đoán 0.05–0.15**.
+  Thí nghiệm không đủ lực để phân biệt hai giả thuyết mà nó định phân biệt.
+
+#### 🔴 Biến chống đỡ luận điểm chính mà TỪ ĐẦU CHƯA AI KIỂM: anneal learning rate
+
+`prune_finetune.py:81,124-125` tạo `ExponentialLR(gamma=0.95)` và gọi `scheduler.step()` mỗi 400
+bước — 12 lần trong 5000 bước, đưa LR cuối về **0.54×**. **3DGS gốc KHÔNG anneal**
+`feature_lr / opacity_lr / scaling_lr / rotation_lr` trong 30k bước đầu (chỉ `xyz` có lịch riêng).
+
+Nên +0.3587 có thể **không phải** "checkpoint chưa luyện đủ" mà là **phần thưởng một lần của anneal**
+mà giai đoạn fine-tune tự mang theo. Hai cách hiểu suy rộng **ngược chiều nhau**:
+
+| cách hiểu | suy rộng thành |
+|---|---|
+| "checkpoint của các bài báo chưa hội tụ" | phê phán checkpoint của người khác |
+| "bản thân giai đoạn fine-tune tặng +0.36 dB cho bất kỳ ai thêm nó" | confound nằm trong **phương pháp**, không phải checkpoint |
+
+→ Đây là thứ EXP-024 phải kiểm.
+
+#### Giới hạn của chính EXP-023
+
+- Attractor mới quan sát trên **một scene** (`train`), một công thức, một khoảng N.
+- "Miền hút" chưa được xác định biên chính xác — mới biết nó nằm giữa 70% và 80%.
+- Toàn bộ suy ra từ dữ liệu có sẵn; chưa có lần chạy nào **thiết kế riêng** để kiểm attractor.
+  Phép thử rẻ đã xác định: chạy từ `datasets/pretrained/models/train/point_cloud/iteration_7000`
+  (N=559,263, có sẵn) — xa hội tụ hơn hẳn, cùng scene, N trong dải đã kiểm.
+
+---
+
 ### EXP-022 — ✅ **SCENE THỨ HAI: cả ba phát biểu tái lập. Và ảo giác trở thành thứ DỰ ĐOÁN ĐƯỢC**
 
 > ### ⛔ ĐÍNH CHÍNH 2026-09-07 — phần "DỰ ĐOÁN ĐƯỢC" trong tiêu đề là SAI
