@@ -1,0 +1,61 @@
+# ==========================================================================
+#  Low-3DGS — .gitignore
+#  Nguyên tắc: dữ liệu thô và model KHÔNG lên git; SỐ ĐO thì CÓ.
+#  Toàn bộ số liệu của dự án chỉ ~600 KB — đó là thứ đáng giữ.
+# ==========================================================================
+
+# --- Dữ liệu thô: 19 GB, tải lại được từ nguồn gốc ---
+datasets/
+
+# --- Model: 861 MB. Tái tạo được bằng scripts/ + checkpoint gốc ---
+*.ply
+*.splat
+*.ckpt
+*.pth
+*.npz
+*.pt
+
+# --- experiments/: loại hết, rồi cho lại đúng thứ cần ---
+experiments/*
+!experiments/*.csv
+!experiments/*.json
+!experiments/*.log
+!experiments/*.mon
+!experiments/*/
+experiments/*/*
+!experiments/*/metric.csv
+!experiments/*/cfg_args
+
+# cameras.json là tham số camera sinh lại được từ COLMAP, không phải kết quả
+experiments/*/cameras.json
+
+# --- results/ ---
+results/checkpoints/
+results/renders/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# --- COLMAP ---
+*.db
+sparse/
+dense/
+
+# --- Hệ điều hành / trình soạn thảo ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# --- File tạm của chính dự án (tiền tố chấm trong tools/ và docs/) ---
+tools/.*
+docs/.*
+!docs/.gitkeep
+
+# run_meta.json gắn mỗi lần chạy với phiên bản mã — PHẢI giữ
+!experiments/*/run_meta.json

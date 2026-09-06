@@ -1,0 +1,1 @@
+Namespace(sh_degree=3, source_path='/mnt/d/low-3DGS/datasets/tandt/train', model_path='/mnt/d/low-3DGS/experiments/knee_train_p050_s1', images='images', resolution=1, white_background=False, data_device='cpu', eval=True)

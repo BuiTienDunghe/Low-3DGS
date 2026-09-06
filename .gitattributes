@@ -1,0 +1,17 @@
+# Dự án chạy trong WSL/Linux. Script .sh mà bị CRLF sẽ lỗi "bad interpreter".
+# Ép LF cho mọi file văn bản trong repo, bất kể máy nào clone.
+* text=auto eol=lf
+
+*.sh    text eol=lf
+*.py    text eol=lf
+*.md    text eol=lf
+*.csv   text eol=lf
+*.json  text eol=lf
+*.log   text eol=lf
+*.mon   text eol=lf
+VERSION text eol=lf
+
+*.ply   binary
+*.pth   binary
+*.png   binary
+*.jpg   binary
