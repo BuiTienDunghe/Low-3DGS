@@ -9,7 +9,7 @@
 📊 **[Xem hình kết quả](https://claude.ai/code/artifact/c3f8262d-fc69-45e1-89bf-8fe70732eff0)** ·
 📋 [Nhật ký thí nghiệm](docs/05_EXPERIMENTS.md) · 🔖 [Quy ước phiên bản](docs/VERSIONING.md)
 
-Phiên bản hiện tại: **v0.5.0** — 22 thí nghiệm, 2 scene, 27 lần chạy huấn luyện.
+Phiên bản hiện tại: **v0.5.0** — 19 mục thí nghiệm đã ghi (ID cấp tới EXP-022), 2 scene, 27 lần chạy huấn luyện.
 
 ---
 
@@ -30,20 +30,33 @@ Chúng tôi chạy nhánh đối chứng — **không nén gì, tinh chỉnh đ�
 
 Gần như toàn bộ "cải thiện" là của việc luyện thêm.
 
-### 2. Ảo giác này **dự đoán được**
+### 2. Vì sao cách so ngây thơ lại đánh lừa — và khi nào nó đánh lừa mạnh nhất
 
-Chạy lại trên scene thứ hai — model đã hội tụ sẵn — thì ảo giác **biến mất**:
+Con số ngây thơ **phân tách chính xác** thành hai phần. Đây là phép cộng trừ, luôn đúng:
 
 ```
-ảo giác xuất hiện  ⟺  lợi ích luyện thêm  >  chi phí nén
-
-train       : +0,3587  >  0,0080   → CÓ ảo giác
-truck-864k  : +0,0475  <  0,2946   → KHÔNG có
+so-với-checkpoint-gốc  =  chi phí nén  +  lợi ích luyện thêm
 ```
 
-Hiệu ứng "luyện thêm" **teo 7,6 lần** trên model đã hội tụ, nhất quán ở cả ba thước đo.
-⇒ **Confound không phải hằng số — nó là hàm của khoảng cách tới hội tụ.**
-Nó sống đúng ở vùng vận hành mà phần lớn bài báo nén 3DGS đang báo cáo.
+Phần **thực nghiệm** — thứ có thể khác đi và đã được đo — là **độ lớn** của số hạng thứ hai:
+
+| scene `train`, cắt 50% | |
+|---|---|
+| chi phí nén | +0,0080 dB |
+| lợi ích luyện thêm | **+0,3587 ± 0,0551 dB** ← lớn gấp ~45 lần |
+| ⇒ tổng (số ngây thơ báo cáo) | **+0,3667 dB** — đổi dấu, thành "nén làm tốt hơn" |
+
+Số hạng "luyện thêm" **có thể đã gần 0** — khi đó cách so ngây thơ vô hại. Nó không gần 0.
+Đó mới là phát hiện.
+
+Và nó **co lại 7,6 lần** trên model đã hội tụ sẵn (+0,3587 → +0,0475), nhất quán ở cả ba
+thước đo. Nghĩa là méo mó nặng nhất đúng ở vùng vận hành mà phần lớn bài báo báo cáo:
+**checkpoint chưa hội tụ, tỉ lệ nén thấp.**
+
+> ⚠️ **Đính chính (v0.5.1).** Bản trước trình bày quan hệ này như một "quy tắc dự đoán
+> bác bỏ được". **Sai** — nó là đồng nhất thức, đúng theo đại số ở mọi bộ dữ liệu, nên
+> không thí nghiệm nào bác bỏ được nó. Nội dung thực nghiệm nằm ở **độ lớn** của các số
+> hạng, không ở quan hệ giữa chúng. Xem [CHANGELOG.md](CHANGELOG.md).
 
 ### 3. PSNR không đủ nhạy để trả lời câu hỏi trung tâm
 
@@ -81,7 +94,7 @@ Ranh giới đo được trên máy này: **949 MiB VRAM cho mỗi triệu Gauss
 ## Cấu trúc
 
 ```
-docs/       05_EXPERIMENTS.md   nhật ký 22 thí nghiệm — nguồn sự thật
+docs/       05_EXPERIMENTS.md   nhật ký thí nghiệm — nguồn sự thật
             PLAN.md             kế hoạch dự án
             REPO_PATCHES.md     mọi sửa đổi lên mã bên thứ ba
             VERSIONING.md       quy ước phiên bản
@@ -114,8 +127,10 @@ Mỗi lần chạy nên gắn phiên bản mã: `bash tools/stamp_run.sh experim
 
 - **Hai scene**, và scene thứ hai là model *đã nén* (864.017 Gaussian), không phải checkpoint
   gốc — đó là model hợp lệ duy nhất chạy nổi cặp đối chứng trên card 4 GB.
-- **Quy tắc dự đoán mới có hai điểm dữ liệu.** Đúng ở cả hai, nhưng hai điểm chưa phải quy luật;
-  cần một điểm ở vùng ranh giới để thử bác bỏ.
+- **Chênh lệch 7,6× của C1 đang lẫn ba biến.** `train` và `truck-864k` khác nhau đồng thời về
+  scene, số Gaussian, và trạng thái hội tụ — nên chưa được quy toàn bộ chênh lệch cho riêng
+  "khoảng cách tới hội tụ". Phép tách: chạy lại cặp đối chứng trên `train` đã tinh chỉnh 5000 bước
+  (checkpoint có sẵn) — cùng scene, cùng N, chỉ khác trạng thái hội tụ.
 - Đường cong đánh đổi 9 điểm chỉ có **seed 0** (trừ ba mức 50/60/66% đã có 3 seed).
 - **"Có ý nghĩa thống kê" ≠ "mắt người thấy được".** Chưa có khảo sát người xem.
 - Thí nghiệm EXP-001..022 chạy **trước khi bật git** ⇒ được đánh dấu `pre_versioning: true`

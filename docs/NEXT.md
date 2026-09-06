@@ -15,7 +15,9 @@ Máy sạch: GPU 12 MiB, không tiến trình sót, đĩa D còn 101 G.
 | cách so ngây thơ | **+0.3667** "tốt hơn!" | **−0.2471** đã âm sẵn |
 | **có ảo giác?** | **CÓ** | **KHÔNG** |
 
-**Kết quả sắc nhất — quy tắc dự đoán:**
+**~~Kết quả sắc nhất — quy tắc dự đoán~~ — ĐÃ RÚT LẠI v0.5.1: đây là đồng nhất thức
+đại số, không bác bỏ được. Phần đứng vững là ĐỘ LỚN của C1. Quan hệ dưới đây vẫn đúng
+nhưng là phép cộng trừ, không phải phát hiện:**
 ```
 ảo giác xuất hiện  <=>  lợi ích luyện thêm > chi phí nén
 train      : +0.3587 > 0.0080  -> CÓ
@@ -108,7 +110,9 @@ gấp ~2 lần số pixel của train/truck, nên công thức workspace khớp 
 
 ## Chưa kiểm chứng, đừng phát biểu như thật
 
-- Scene 2 **thiếu seed 2 của nhánh nén** ⇒ mọi con số truck-864k hiện là n=3 (đối chứng) / **n=2** (nén).
+- ~~Scene 2 thiếu seed 2 của nhánh nén~~ — **đã xong 2026-09-07, nay n=3 cả hai nhánh.**
+  (Dòng này là tàn dư từ lúc loạt chạy còn dở; skill `bao-cao` bắt được vì nó đối chiếu
+  tài liệu với `experiments/scene2_truck864.csv` thay vì tin tài liệu.)
 - Đường cong đánh đổi của `train` vẫn chỉ **seed 0** (trừ 50/60/66% đã có 3 seed).
 - Cắt bậc màu: phần tiết kiệm bộ nhớ là **tính toán**, chưa đo. Chưa thử phục hồi sau khi cắt màu.
 - Ghép hai trục nén (cắt hạt × cắt màu) **chưa đo**.

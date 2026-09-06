@@ -14,6 +14,41 @@ khoa học**, không phải API.
 
 ---
 
+## [0.5.1] — 2026-09-07
+
+### Rút lại
+- **"Quy tắc dự đoán ảo giác"** — phát biểu `ảo giác ⟺ lợi ích luyện thêm > chi phí nén`
+  được trình bày ở v0.5.0 như "cơ chế bác bỏ được". **Sai.** Ba đại lượng định nghĩa trên
+  cùng một baseline nên `ngây thơ ≡ trung thực + C1` **theo đại số**. Kiểm số: sai khác
+  5.55e-17 (train) và 0 (truck-864k). Không thí nghiệm nào bác bỏ được một đồng nhất thức.
+- Kèm theo: mô tả "chuyển từ quan sát sang cơ chế bác bỏ được" — ngược với sự thật.
+
+### Phần KHÔNG bị ảnh hưởng
+- Độ lớn C1 = **+0.3587 ± 0.0551 dB** trên `train` — đo được, có thể đã gần 0, và không.
+  Đây mới là nội dung thực nghiệm: nó đủ lớn để **đổi dấu** con số ngây thơ.
+- C1 co **7.6×** trên model đã hội tụ — đo được (nhưng xem giới hạn mới bên dưới).
+- Toàn bộ C3 (thứ tự độ nhạy thước đo) và mọi kết quả về bộ nhớ.
+
+### Giới hạn mới được nêu
+- Chênh lệch 7.6× của C1 lẫn **ba biến**: scene, số Gaussian, trạng thái hội tụ — cả ba
+  đổi cùng lúc giữa `train` và `truck-864k`. Phép tách rẻ: chạy lại cặp đối chứng trên
+  `exp017_train_noprune@35000` (đã có sẵn trên đĩa, cùng scene, cùng N=1,026,508).
+
+### Sửa
+- `docs/NEXT.md` ghi scene 2 nhánh nén `n=2` trong khi dữ liệu có đủ 3 seed.
+- `docs/REPO_PATCHES.md` còn ghi "chưa dùng git".
+- `README.md` đếm 22 thí nghiệm, tài liệu thực có 19 mục đã viết.
+- `scripts/run_scene2.sh:117` có `
+` viết thành ký tự thường (không ảnh hưởng logic).
+- 5 thư mục run thiếu `run_meta.json`.
+
+### Thêm
+- Skill `bao-cao` (`.claude/skills/bao-cao/`) — báo cáo trạng thái bằng cách **tính lại từ
+  dữ liệu thô rồi đối chiếu với tài liệu**. Chính skill này phát hiện toàn bộ các mục trên,
+  kể cả lỗi đồng nhất thức, ngay trong lần chạy thử đầu tiên.
+
+---
+
 ## [0.5.0] — 2026-09-07
 
 Phiên bản **đầu tiên có git**. Toàn bộ trạng thái dự án tại thời điểm này.
@@ -21,9 +56,9 @@ Phiên bản **đầu tiên có git**. Toàn bộ trạng thái dự án tại t
 ### Thêm
 - **Scene thứ hai** (EXP-022): `truck` đã prune còn 864.017 hạt, 6 lần chạy.
   Cả ba phát biểu C1/C2/C3 đều tái lập.
-- **Quy tắc dự đoán ảo giác** — kết quả sắc nhất của dự án tới nay:
-  `ảo giác xuất hiện ⟺ lợi ích luyện thêm > chi phí nén`.
-  Đúng ở cả hai scene. Chuyển từ *quan sát* sang *cơ chế bác bỏ được*.
+- ~~"Quy tắc dự đoán ảo giác"~~ — **RÚT LẠI ở v0.5.1**, xem mục đó. Quan hệ này là
+  đồng nhất thức đại số, không phải quy luật thực nghiệm.
+  Phần đứng vững: **độ lớn** của số hạng "luyện thêm" (+0.3587 dB) và mức co lại của nó.
 - Đo VRAM **từ trong tiến trình** (`max_memory_allocated`), cài qua `sitecustomize.py`
   ngoài repo ⇒ 0 dòng sửa mã bên thứ ba. NVML báo cao hơn ~220 MiB vì đo *reserved*.
 - `tools/cross_scene.py`, `tools/knee_errorbars.py`, `tools/stamp_run.sh`, `tools/bump_version.sh`

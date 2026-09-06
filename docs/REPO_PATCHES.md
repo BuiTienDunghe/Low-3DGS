@@ -1,7 +1,8 @@
 # Sửa đổi lên mã nguồn bên thứ ba
 
 Mọi thay đổi dự án này áp lên mã của người khác, để người sau tái lập được **chính xác**.
-Chưa dùng git cho thư mục dự án, nên đây là bản ghi tay — cập nhật **mỗi khi** chạm vào mã bên thứ ba.
+Từ v0.5.0 dự án đã có git, nhưng mã bên thứ ba nằm **ngoài** repo này nên vẫn phải ghi tay —
+cập nhật **mỗi khi** chạm vào nó. Sinh lại bảng: `bash tools/collect_patches.sh`.
 
 **Repo gốc:** `j-alex-hanson/gaussian-splatting-pup` @ `e971ea4802908c69eab7e8601bb1eddd2e443754`
 **Sinh lại bảng này:** `bash tools/collect_patches.sh`

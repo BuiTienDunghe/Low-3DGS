@@ -223,6 +223,23 @@ Chỉ giữ throttle thật (nhiệt / nguồn / HW slowdown).
 ---
 
 ### EXP-022 — ✅ **SCENE THỨ HAI: cả ba phát biểu tái lập. Và ảo giác trở thành thứ DỰ ĐOÁN ĐƯỢC**
+
+> ### ⛔ ĐÍNH CHÍNH 2026-09-07 — phần "DỰ ĐOÁN ĐƯỢC" trong tiêu đề là SAI
+> Quan hệ `ảo giác ⟺ lợi ích luyện thêm > chi phí nén` là **đồng nhất thức đại số**,
+> không phải quy luật thực nghiệm. Ba đại lượng cùng định nghĩa trên một baseline nên
+> `ngây thơ ≡ trung thực + C1` luôn đúng. Kiểm số: sai khác **5.55e-17** (train) và **0**
+> (truck-864k) — tức là đúng tới độ chính xác máy, ở mọi bộ dữ liệu.
+> **Không thí nghiệm nào bác bỏ được nó**, nên nói nó là "cơ chế bác bỏ được" là ngược.
+>
+> **Phần vẫn đứng vững, và mới là nội dung thực nghiệm:** *độ lớn* của C1
+> (+0.3587 ± 0.0551 dB trên `train`) — nó **có thể đã gần 0** và không hề gần 0, đủ lớn
+> để đổi dấu con số ngây thơ. Cùng với mức co lại 7.6× trên model đã hội tụ.
+>
+> **Giới hạn mới phải nêu:** chênh lệch 7.6× lẫn **ba biến** (scene, số Gaussian, trạng thái
+> hội tụ) đổi cùng lúc. Phép tách rẻ, checkpoint đã có sẵn: chạy lại cặp đối chứng trên
+> `experiments/exp017_train_noprune/point_cloud/iteration_35000/point_cloud.ply`
+> — cùng scene, cùng N=1,026,508, chỉ khác trạng thái hội tụ. Dự đoán ghi trước:
+> nếu C1' vẫn ~0.36 dB thì phát biểu "confound là hàm của khoảng cách tới hội tụ" **SAI**.
 **Ngày:** 2026-09-07 · **Script:** `scripts/run_scene2.sh` · **Phân tích:** `tools/cross_scene.py`
 **Dữ liệu:** `experiments/scene2_truck864.csv` · 6 lần chạy (đối chứng×3, cắt 50%×3)
 
