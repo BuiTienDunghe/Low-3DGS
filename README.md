@@ -9,7 +9,7 @@
 📊 **[Xem hình kết quả](https://claude.ai/code/artifact/c3f8262d-fc69-45e1-89bf-8fe70732eff0)** ·
 📋 [Nhật ký thí nghiệm](docs/05_EXPERIMENTS.md) · 🔖 [Quy ước phiên bản](docs/VERSIONING.md)
 
-Phiên bản hiện tại: **v0.5.0** — 19 mục thí nghiệm đã ghi (ID cấp tới EXP-022), 2 scene, 27 lần chạy huấn luyện.
+Phiên bản hiện tại: **v0.6.0** — 21 mục thí nghiệm đã ghi (ID cấp tới EXP-024), 2 scene, 30 lần chạy huấn luyện.
 
 ---
 
@@ -72,6 +72,26 @@ Tỉ lệ tín hiệu/nhiễu của chi phí nén, đo qua 3 seed:
 ở mức 64,9 lần nhiễu. Thứ tự LPIPS > SSIM > PSNR tái lập ở **cả hai** scene.
 Mà PSNR mới là con số hầu hết bài báo đặt lên tiêu đề.
 
+### 4. 🔴 Nhưng "vùng miễn phí" có thể không phải chuyện của nén
+
+Gộp mọi lần chạy trên `train`: điểm xuất phát trải **1,56 dB** (cắt 20–70%) nhưng điểm dừng
+chỉ trải **0,17 dB** — co lại **9,3 lần**, tụ về **22,1762 ± 0,0305**. Công thức tinh chỉnh
+kéo mọi thứ về cùng một chỗ.
+
+Điều đó giải thích lại cả hai con số ở trên: C1 chính là *khoảng cách từ checkpoint tới điểm
+dừng đó* (22,1762 − 21,8157 = 0,3605 ≈ 0,3587), và "nén 50% miễn phí" chỉ là **hai nhánh cùng
+rơi về một điểm dừng** — chênh lệch +0,0080 nằm gọn trong nhiễu 0,0305 của chính attractor.
+
+Tắt `ExponentialLR` mà PUP thêm vào (3DGS gốc không có trong 30k bước đầu): độ phân tán điểm
+dừng **tăng 1,93 lần**. Nên chuỗi phụ thuộc có thể là:
+
+```
+"nén tới 50% gần như miễn phí"  ←  cùng attractor  ←  anneal learning rate  ←  thứ PUP thêm vào
+```
+
+Nếu đúng, "vùng miễn phí" là tính chất của **công thức**, không phải của **phép nén**.
+Chưa kết luận được — xem EXP-023, EXP-024 và mục Giới hạn.
+
 ---
 
 ## Vì sao lại làm trên máy yếu
@@ -127,10 +147,11 @@ Mỗi lần chạy nên gắn phiên bản mã: `bash tools/stamp_run.sh experim
 
 - **Hai scene**, và scene thứ hai là model *đã nén* (864.017 Gaussian), không phải checkpoint
   gốc — đó là model hợp lệ duy nhất chạy nổi cặp đối chứng trên card 4 GB.
-- **Chênh lệch 7,6× của C1 đang lẫn ba biến.** `train` và `truck-864k` khác nhau đồng thời về
-  scene, số Gaussian, và trạng thái hội tụ — nên chưa được quy toàn bộ chênh lệch cho riêng
-  "khoảng cách tới hội tụ". Phép tách: chạy lại cặp đối chứng trên `train` đã tinh chỉnh 5000 bước
-  (checkpoint có sẵn) — cùng scene, cùng N, chỉ khác trạng thái hội tụ.
+- **Chênh lệch 7,6× của C1 lẫn ba biến** (scene, số Gaussian, trạng thái hội tụ) — chưa tách được.
+  Phép tách từng đề xuất (chạy lại trên `train` đã tinh chỉnh) **đã bị bác bỏ trước khi chạy**:
+  model đó nằm sẵn trên attractor nên kết quả biết trước, và n=3 không đủ lực. Xem EXP-023.
+- 🔴 **Cả "vùng miễn phí" lẫn attractor có thể là tính chất của CÔNG THỨC tinh chỉnh, không phải
+  của phép nén** (EXP-024). Đây là nghi vấn lớn nhất còn mở của dự án.
 - Đường cong đánh đổi 9 điểm chỉ có **seed 0** (trừ ba mức 50/60/66% đã có 3 seed).
 - **"Có ý nghĩa thống kê" ≠ "mắt người thấy được".** Chưa có khảo sát người xem.
 - Thí nghiệm EXP-001..022 chạy **trước khi bật git** ⇒ được đánh dấu `pre_versioning: true`

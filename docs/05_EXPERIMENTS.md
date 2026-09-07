@@ -222,6 +222,77 @@ Chỉ giữ throttle thật (nhiệt / nguồn / HW slowdown).
 
 ---
 
+### EXP-024 — ⚖️ **Anneal learning rate chiếm ~56% của C1 — nhưng n=3 chưa đủ chứng minh.** Điều chắc chắn: anneal là thứ TẠO RA attractor
+**Ngày:** 2026-09-07 · **Script:** `scripts/run_noanneal.sh` · **Dữ liệu:** `experiments/exp024_noanneal.csv`
+**Patch:** `L3DGS_NO_ANNEAL` — xem `docs/REPO_PATCHES.md` mục 2b
+**Commit:** `1ee1c052` — **ba lần chạy đầu tiên của dự án gắn được với commit thật**
+
+**Câu hỏi:** C1 = +0.3587 dB là "checkpoint chưa hội tụ", hay chỉ là phần thưởng một lần của
+`ExponentialLR(gamma=0.95)` mà PUP thêm vào còn 3DGS gốc không có trong 30k bước đầu?
+
+**Thiết kế:** nhánh đối chứng × 3 seed, khác EXP-018 **đúng một biến**: `L3DGS_NO_ANNEAL=1`.
+Cổng chặn: nếu điểm dừng seed 0 trùng khít giá trị có-anneal thì cờ không ăn ⇒ loại.
+Đã qua cổng (21.9890 ≠ 22.1799).
+
+#### Kết quả
+
+| seed | điểm dừng CÓ anneal | KHÔNG anneal | C1 có | C1 không |
+|---|---|---|---|---|
+| 0 | 22.179857 | 21.988998 | +0.3642 | +0.1733 |
+| 1 | 22.116719 | 21.861285 | +0.3010 | +0.0456 |
+| 2 | 22.226609 | 22.072802 | +0.4109 | +0.2571 |
+| **TB** | | | **+0.3587 ± 0.0551** | **+0.1587 ± 0.1065** |
+
+**Ước lượng điểm: anneal chiếm 55.8% của C1** (chênh +0.2000 dB).
+
+**Nhưng chưa đủ ý nghĩa thống kê.** Welch: t = 2.889, df ≈ 3.0, t tới hạn 95% = 3.182.
+Rơi vào dải "0.15–0.30 → đóng góp một phần, cần thêm seed" của dự đoán ghi trước. Sát ngưỡng,
+không vượt. **Không được phát biểu "anneal chiếm hơn một nửa" như một kết luận** — mới là ước lượng điểm.
+
+#### 🔑 Điều CHẮC CHẮN, và quan trọng hơn con số trên: anneal TẠO RA attractor
+
+| | biên độ điểm dừng qua 3 seed |
+|---|---|
+| CÓ anneal | **0.1099 dB** |
+| KHÔNG anneal | **0.2115 dB** |
+| | **SD tăng 1.93 lần** |
+
+Bỏ anneal thì điểm dừng **tán ra**, không còn tụ về một chỗ. Nghĩa là:
+
+> **Attractor 22.1762 ± 0.0305 của EXP-023 không phải tính chất của scene hay của model —
+> nó là tính chất của LỊCH LEARNING RATE mà công thức fine-tune này áp vào.**
+
+Và vì attractor là thứ giải thích "nén 50% miễn phí" (EXP-023, hai nhánh bằng nhau vì cùng
+rơi về một điểm dừng), nên chuỗi phụ thuộc là:
+
+```
+"nén tới 50% gần như miễn phí"
+   <- vì cả hai nhánh rơi về cùng attractor
+      <- vì anneal LR kéo chúng về đó
+         <- mà anneal là thứ PUP THÊM VÀO, 3DGS gốc không có trong 30k bước đầu
+```
+
+⇒ **"Vùng miễn phí" có thể là tính chất của công thức tinh chỉnh, không phải của phép nén.**
+Đây là phát biểu mạnh hơn và khó chịu hơn phát biểu cũ, và nó kiểm được.
+
+#### Việc phải làm tiếp
+
+1. **Thêm seed.** n=3 mỗi nhánh cho t=2.889, thiếu 0.29 so với ngưỡng. Thêm 2 seed mỗi nhánh
+   (n=5, df≈8, t tới hạn ≈2.31) gần như chắc chắn kết luận được — **4 lần chạy, ~70 phút**.
+2. **Kiểm attractor không-anneal.** Nếu attractor thật sự do anneal tạo ra thì chạy các mức cắt
+   khác nhau với `L3DGS_NO_ANNEAL=1` phải cho điểm dừng **tán ra theo điểm xuất phát**,
+   thay vì tụ lại. Đó là phép thử trực tiếp, và nó **có thể thất bại**.
+
+#### Ghi chú kỹ thuật
+
+- VRAM 1847.6 MiB ở cả 3 lần chạy (đo trong tiến trình, tất định). Cao hơn nhánh có anneal
+  (1691.7) — chưa rõ vì sao, đáng xem lại; có thể do LR cao hơn làm Gaussian bung rộng hơn.
+- ⚠️ `run_meta.json` ghi `commit 1ee1c052` nhưng `dirty: true` — vì **chính lần chạy ghi file vào
+  `experiments/`** làm bẩn cây. Đây là khiếm khuyết của `stamp_run.sh`: phép kiểm dirty nên
+  **loại trừ `experiments/`**, nếu không thì không lần chạy nào có thể sạch.
+
+---
+
 ### EXP-023 — 🔑 **ĐIỂM DỪNG LÀ MỘT ATTRACTOR.** Phải đọc lại C1 và C2 theo cách khác
 **Ngày:** 2026-09-07 · **Nguồn:** phân tích lại dữ liệu đã có, **không chạy thêm lần nào**
 **Phát hiện bởi:** workflow phản biện thiết kế thí nghiệm exp017 — nó bác luôn thí nghiệm đó

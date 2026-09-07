@@ -1,0 +1,23 @@
+{
+  "pre_versioning": false,
+  "project_version": "0.5.1",
+  "git": {
+    "commit": "1ee1c0521010176b3a16041f4d984484e8579b6f",
+    "branch": "main",
+    "dirty": true
+  },
+  "third_party": {
+    "repo": "gaussian-splatting-pup",
+    "commit": "e971ea4802908c69eab7e8601bb1eddd2e443754",
+    "dirty": true,
+    "patches": "xem docs/REPO_PATCHES.md"
+  },
+  "env": {
+    "python": "3.12.3",
+    "torch": "2.14.0+cu126",
+    "cuda": "12.6",
+    "gpu": "NVIDIA GeForce GTX 1650 Ti",
+    "driver": "560.70"
+  },
+  "stamped_at": "2026-09-06T23:02:41+00:00"
+}
