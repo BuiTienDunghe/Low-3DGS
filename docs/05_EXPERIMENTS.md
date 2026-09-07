@@ -222,6 +222,75 @@ Chỉ giữ throttle thật (nhiệt / nguồn / HW slowdown).
 
 ---
 
+### EXP-027 — ❌ **Giả thuyết "biên miền hút ở tỉ lệ khối lượng quan trọng cố định" BỊ BÁC BỎ.** Nhưng biên miền hút nay là con số đo được
+**Ngày:** 2026-09-08 · **Công cụ:** `tools/importance_profile.py` · `tools/basin_vs_importance.py`
+**Dữ liệu:** `experiments/importance_profile.csv` · **Chi phí: ~2 phút GPU, KHÔNG lần huấn luyện nào**
+
+**Giả thuyết (ghi trước):** EXP-026 cho thấy miền hút rộng hẹp tuỳ model. Nếu biên của nó nằm ở
+một **tỉ lệ khối lượng quan trọng bị cắt** cố định — chứ không phải tỉ lệ *số hạt* — thì hai model
+rất khác nhau sẽ **trùng nhau** trên trục đó, và ta **dự đoán được mức nén miễn phí mà không cần
+chạy fine-tune**. Đó sẽ là công cụ dùng được cho model của người khác.
+
+**Cách kiểm:** chỉ forward pass. Dùng đúng điểm quan trọng mà pipeline dùng để prune
+(`v_important_score`, `v_pow=0.1`) và đúng quy tắc chọn của `prune_gaussians`.
+
+#### Bước 1 — định nghĩa và đo biên miền hút
+
+**Định nghĩa (mới, dùng từ đây):** biên miền hút là mức cắt mà điểm dừng lệch khỏi mốc đối chứng
+đúng **2 lần nhiễu giữa các seed**. Nội suy tuyến tính giữa hai mức kẹp.
+
+| | mốc đối chứng | nhiễu seed | **biên miền hút** |
+|---|---|---|---|
+| `train` | 22.1744 | 0.0551 | **cắt 67.19%** |
+| `truck-864k` | 25.1606 | 0.0110 | **cắt 20.81%** |
+
+Hai khoảng mơ hồ ("giữa 66 và 70%", "giữa 20 và 30%") nay là **hai con số có tiêu chí rõ ràng**.
+
+#### Bước 2 — giả thuyết bị bác bỏ
+
+| | biên (số hạt) | → khối lượng quan trọng bị cắt |
+|---|---|---|
+| `train` | 67.19% | **7.790%** |
+| `truck-864k` | 20.81% | **2.069%** |
+| **tỉ số** | **3.23×** | **3.76×** |
+
+**Đổi sang trục khối lượng quan trọng làm hai model XA NHAU HƠN, không gần lại.**
+Giả thuyết sai, và sai theo hướng rõ ràng — không phải "chưa đủ dữ liệu".
+
+⇒ **Không dự đoán được mức nén miễn phí chỉ từ phân bố điểm quan trọng.**
+Miền hút phụ thuộc thứ gì đó mà điểm quan trọng tĩnh không nắm bắt được — nhiều khả năng là
+**khả năng bù trừ của các hạt còn lại trong lúc tối ưu**, thứ chỉ lộ ra khi thực sự chạy.
+
+#### Bước 3 — nhưng phép đo phụ thì dùng được
+
+Khối lượng quan trọng nằm ở nhóm hạt yếu nhất:
+
+| nhóm yếu nhất | `train` | `truck-864k` | |
+|---|---|---|---|
+| 20% | 0.044% | 1.942% | truck864 gấp **44×** |
+| 50% | 2.131% | 8.839% | gấp **4.2×** |
+| 66% | 7.199% | 15.713% | gấp **2.2×** |
+
+Ở `truck-864k`, nhóm hạt yếu mang nhiều khối lượng quan trọng hơn hẳn ⇒ phân bố **ít lệch hơn**
+⇒ **còn ít dư thừa để cắt**. Đúng chiều với miền hút hẹp hơn, và đo được **không cần huấn luyện**.
+Nhưng quan hệ định lượng không đơn giản, nên đây là **chỉ báo**, không phải công cụ dự đoán.
+
+#### Vì sao vẫn đáng ghi
+
+- Đây là giả thuyết đầu tiên của dự án được **bác bỏ với chi phí ~2 phút GPU**. Nếu tin nó rồi
+  mới đi chạy loạt thí nghiệm để "xác nhận", sẽ mất nhiều giờ cho một tiền đề sai.
+- Nó **loại bỏ** lời giải thích đơn giản nhất, nên thu hẹp không gian giả thuyết còn lại.
+- Biên miền hút giờ có **định nghĩa vận hành và số đo**, dùng được cho mọi so sánh về sau.
+
+#### Còn thiếu
+
+- Biên miền hút của `train` dựa trên các điểm n=1 (trừ 66% có n=3); của `truck-864k` cũng n=1.
+  Tiêu chí 2× nhiễu là **quy ước**, không phải ngưỡng tự nhiên.
+- Hai model, hai điểm — bất kỳ quan hệ nào rút ra từ hai điểm đều dễ là trùng hợp.
+  Chính vì thế EXP-027 chỉ **bác bỏ**, không đề xuất quan hệ thay thế.
+
+---
+
 ### EXP-026 — ✅ **Attractor TÁI LẬP trên scene thứ hai. Và miền hút hẹp lại khi model đã bị nén**
 **Ngày:** 2026-09-08 · **Script:** `scripts/run_scene2_attractor.sh` · **Dữ liệu:** `experiments/exp026_scene2_attractor.csv`
 **Commit:** `0225da02` — **ba lần chạy đầu tiên có dấu xuất xứ SẠCH** (không còn `dirty: true`)

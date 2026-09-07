@@ -9,7 +9,7 @@
 📊 **[Xem hình kết quả](https://claude.ai/code/artifact/c3f8262d-fc69-45e1-89bf-8fe70732eff0)** ·
 📋 [Nhật ký thí nghiệm](docs/05_EXPERIMENTS.md) · 🔖 [Quy ước phiên bản](docs/VERSIONING.md)
 
-Phiên bản hiện tại: **v0.8.0** — 23 mục thí nghiệm đã ghi (ID cấp tới EXP-026), 2 scene, 36 lần chạy huấn luyện.
+Phiên bản hiện tại: **v0.9.0** — 24 mục thí nghiệm đã ghi (ID cấp tới EXP-027), 2 scene, 36 lần chạy huấn luyện.
 
 ---
 
@@ -96,6 +96,12 @@ chất của **công thức tinh chỉnh**, không phải của một scene. Nh�
 thuộc model**: `train` còn trong miền tới ~70% cắt, còn `truck-864k` (vốn đã bị nén 66%) đã ra
 khỏi miền ở ~20–30%. ⇒ **Không có con số "nén tới X% là miễn phí" dùng chung được** — nó là
 miền hút của công thức trên model đang xét, rộng hẹp theo lượng dư thừa còn lại.
+
+Biên miền hút nay có **định nghĩa vận hành** (mức cắt làm điểm dừng lệch 2 lần nhiễu seed) và
+số đo: `train` **67,19%**, `truck-864k` **20,81%**. Chúng tôi đã thử dự đoán con số đó từ phân bố
+điểm quan trọng của model — **thất bại**: đổi sang trục "khối lượng quan trọng bị cắt" làm hai
+model xa nhau hơn (3,76× so với 3,23×). Mức nén miễn phí **không suy ra được từ model tĩnh**;
+nó phụ thuộc khả năng bù trừ trong lúc tối ưu, thứ chỉ lộ ra khi thực sự chạy.
 
 ---
 

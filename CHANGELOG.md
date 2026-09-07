@@ -14,6 +14,29 @@ khoa học**, không phải API.
 
 ---
 
+## [0.9.0] — 2026-09-08
+
+### Thêm — biên miền hút nay là số đo được
+Định nghĩa vận hành: mức cắt làm điểm dừng lệch **2 lần nhiễu giữa các seed**.
+`train` = **67,19%** · `truck-864k` = **20,81%**. Thay cho hai khoảng mơ hồ trước đó.
+
+### Bác bỏ — EXP-027
+Giả thuyết "biên miền hút nằm ở tỉ lệ **khối lượng quan trọng** bị cắt cố định" — nếu đúng thì
+dự đoán được mức nén miễn phí **không cần chạy fine-tune**. **Sai:** trên trục đó hai model lệch
+**3,76×**, còn xa hơn cả trục số hạt (3,23×).
+⇒ Mức nén miễn phí không suy ra được từ model tĩnh.
+Chi phí bác bỏ: **~2 phút GPU, không lần huấn luyện nào.**
+
+### Phép đo phụ vẫn dùng được
+Khối lượng quan trọng ở nhóm hạt yếu nhất 50%: `train` 2,13% vs `truck-864k` 8,84% (gấp 4,2×).
+Phân bố ít lệch hơn ⇒ còn ít dư thừa. Đúng chiều với miền hút hẹp hơn, nhưng chỉ là **chỉ báo**,
+không phải công cụ dự đoán.
+
+### Thêm công cụ
+`tools/importance_profile.py` · `tools/basin_vs_importance.py` · `scripts/run_importance_profile.sh`
+
+---
+
 ## [0.8.0] — 2026-09-08
 
 ### Phát hiện
