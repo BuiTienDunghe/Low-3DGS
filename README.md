@@ -9,7 +9,7 @@
 📊 **[Xem hình kết quả](https://claude.ai/code/artifact/c3f8262d-fc69-45e1-89bf-8fe70732eff0)** ·
 📋 [Nhật ký thí nghiệm](docs/05_EXPERIMENTS.md) · 🔖 [Quy ước phiên bản](docs/VERSIONING.md)
 
-Phiên bản hiện tại: **v0.7.0** — 22 mục thí nghiệm đã ghi (ID cấp tới EXP-025), 2 scene, 33 lần chạy huấn luyện.
+Phiên bản hiện tại: **v0.8.0** — 23 mục thí nghiệm đã ghi (ID cấp tới EXP-026), 2 scene, 36 lần chạy huấn luyện.
 
 ---
 
@@ -90,6 +90,12 @@ thay vì 9,3×), và trải điểm dừng nhỏ hơn cả nhiễu giữa các s
 Anneal chỉ **dịch chỗ** attractor (+0,153 dB) và làm nó ổn định hơn (nhiễu giảm 1,93×).
 Cấu trúc ảo giác giữ nguyên khi bỏ anneal — ở mức cắt 50%, C1 vẫn chiếm **96%** của con số
 ngây thơ. **Hiện tượng này không phải artifact của lịch learning rate.**
+
+**Và attractor tái lập trên scene thứ hai** (co 15,7× so với 9,3–16,1× ở `train`) ⇒ nó là tính
+chất của **công thức tinh chỉnh**, không phải của một scene. Nhưng **bề rộng miền hút thì phụ
+thuộc model**: `train` còn trong miền tới ~70% cắt, còn `truck-864k` (vốn đã bị nén 66%) đã ra
+khỏi miền ở ~20–30%. ⇒ **Không có con số "nén tới X% là miễn phí" dùng chung được** — nó là
+miền hút của công thức trên model đang xét, rộng hẹp theo lượng dư thừa còn lại.
 
 ---
 

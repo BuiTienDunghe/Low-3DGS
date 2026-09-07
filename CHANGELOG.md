@@ -14,6 +14,27 @@ khoa học**, không phải API.
 
 ---
 
+## [0.8.0] — 2026-09-08
+
+### Phát hiện
+- **EXP-026 — attractor tái lập trên scene thứ hai.** Co **15,7×** (`truck-864k`, cắt 10–30%),
+  so với 9,3× (train, anneal bật) và 16,1× (train, anneal tắt). Phán quyết ghi trước (≥5×) thoả.
+  ⇒ Attractor là tính chất của **công thức tinh chỉnh**, không phải của một scene.
+- **Miền hút HẸP LẠI khi model đã bị nén.** `train` còn trong miền tới ~70% cắt;
+  `truck-864k` (đã nén 66%) đã ra khỏi miền ở ~30% (lệch 5,7 lần nhiễu).
+  ⇒ **Không có con số "nén tới X% là miễn phí" dùng chung được.** Bề rộng miền hút phụ thuộc
+  lượng dư thừa còn lại của model. Định lượng được trực giác "nén cái đã nén thì đắt hơn".
+
+### Sửa — cờ `dirty` giờ mới dùng được
+`tools/stamp_run.sh` báo `dirty: true` cho **mọi** lần chạy vì hai lỗi:
+(1) tính cả `experiments/` vào phép kiểm, mà chính lần chạy ghi kết quả vào đó;
+(2) tin stat cache của git — trên `/mnt/d` (9p) git báo SẠCH ngay sau khi file vừa bị sửa
+(quan sát trực tiếp: WSL git 0 mục / Windows git 1 mục). False negative đúng ở chỗ nguy hiểm nhất.
+Nay `update-index --really-refresh` trước, và loại trừ `experiments/`.
+**EXP-026 là ba lần chạy đầu tiên có dấu xuất xứ sạch.**
+
+---
+
 ## [0.7.0] — 2026-09-08
 
 ### Phát hiện

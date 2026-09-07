@@ -222,6 +222,74 @@ Chỉ giữ throttle thật (nhiệt / nguồn / HW slowdown).
 
 ---
 
+### EXP-026 — ✅ **Attractor TÁI LẬP trên scene thứ hai. Và miền hút hẹp lại khi model đã bị nén**
+**Ngày:** 2026-09-08 · **Script:** `scripts/run_scene2_attractor.sh` · **Dữ liệu:** `experiments/exp026_scene2_attractor.csv`
+**Commit:** `0225da02` — **ba lần chạy đầu tiên có dấu xuất xứ SẠCH** (không còn `dirty: true`)
+
+**Câu hỏi:** attractor là tính chất của scene `train`, hay của **công thức tinh chỉnh** nói chung?
+Nếu chỉ của một scene thì mọi phát biểu phải hạ xuống "quan sát trên một scene".
+
+**Chọn mức cắt nhẹ (10/20/30%)** vì ở scene 2 mức 50% đã cho chi phí −0.2946 dB — **đã ngoài
+miền hút**. Đo attractor thì phải đo trong miền.
+
+**Phán quyết ghi trước:** co ≥5 lần → có attractor · ≤2 lần → không.
+
+#### Kết quả
+
+| cắt | xuất phát | điểm dừng | lệch đối chứng | = mấy lần nhiễu |
+|---|---|---|---|---|
+| 0% (mốc, n=3) | 25.1131 | **25.1606** | — | SD 0.0110 |
+| 10% | 24.9608 | **25.1613** | +0.0007 | **0.1×** |
+| 20% | 24.5753 | **25.1421** | −0.0185 | 1.7× |
+| 30% | 23.9629 | **25.0977** | −0.0629 | 5.7× |
+| **trải** | **0.9979** | **0.0636** | | |
+| **co lại** | | **15.7×** | | |
+
+**Đo được 15.7× ⇒ CÓ ATTRACTOR trên scene 2.** Phán quyết ghi trước được thoả.
+
+#### Attractor có cùng độ mạnh ở cả hai scene
+
+| | hệ số co | dải mức cắt |
+|---|---|---|
+| `train`, anneal bật | 9.3× | 20–70% |
+| `train`, anneal tắt | 16.1× | 20–70% |
+| **`truck-864k`** | **15.7×** | **10–30%** |
+
+⇒ **Attractor là tính chất của CÔNG THỨC TINH CHỈNH, không phải của một scene cụ thể.**
+Đây là điều kiện cần để cách diễn giải của dự án suy rộng được sang model của người khác.
+
+#### 🔑 Phát hiện phụ: miền hút HẸP LẠI khi model đã bị nén
+
+| | còn trong miền hút tới | |
+|---|---|---|
+| `train` (checkpoint gốc, 1.03M) | **~70%** | ở 50% chi phí chỉ +0.0080, nằm trong nhiễu |
+| `truck-864k` (đã nén 66%, 864k) | **~20%** | ở 30% đã lệch **5.7 lần nhiễu** |
+
+Model đã bị cắt 66% một lần thì **còn ít dư thừa để cắt tiếp**, và miền hút thu hẹp tương ứng.
+Điều này định lượng được trực giác "nén cái đã nén thì đắt hơn" — và nó khớp với EXP-022
+(cắt 50% trên `truck-864k` tốn −0.2946 dB, trong khi cùng mức trên `train` gần như miễn phí).
+
+⇒ Phát biểu về "vùng miễn phí" phải kèm điều kiện: **nó là miền hút của công thức tinh chỉnh
+trên model ĐANG XÉT, và bề rộng của nó phụ thuộc lượng dư thừa còn lại.** Không có một con số
+"nén tới X% là miễn phí" dùng chung được.
+
+#### Xuất xứ — lần đầu hoạt động đúng
+
+`run_meta.json` của cả ba lần chạy ghi `commit 0225da02` với `dirty: false`.
+Trước đó mọi lần chạy đều `dirty: true` vì hai lỗi trong `stamp_run.sh`:
+loại kiểm tính cả `experiments/` (mà chính lần chạy ghi vào đó), và tin stat cache của git
+(trên `/mnt/d` git báo SẠCH ngay sau khi file vừa bị sửa — đã quan sát trực tiếp).
+
+#### Còn thiếu
+
+- **n=1 mỗi mức cắt.** Hệ số 15.7× không tin được về độ lớn; nhưng hướng chắc vì trải điểm dừng
+  (0.0636) chỉ bằng 5.8 lần nhiễu seed trong khi trải xuất phát bằng 91 lần.
+- Biên miền hút của cả hai scene mới biết trong khoảng, chưa xác định điểm.
+- Vẫn chưa kiểm attractor ở scene thứ ba — nhưng `playroom`/`drjohnson` không chạy nổi cặp
+  đối chứng trên card 4 GB (EXP-015, EXP-022).
+
+---
+
 ### EXP-025 — ✅ **Attractor KHÔNG do anneal tạo ra. Diễn giải EXP-024 của tôi SAI — và phát hiện chính mạnh lên**
 **Ngày:** 2026-09-08 · **Script:** `scripts/run_noanneal_sweep.sh` · **Dữ liệu:** `experiments/exp025_noanneal_sweep.csv`
 **Commit:** `b7750be7` · 3 lần chạy, seed 0, `L3DGS_NO_ANNEAL=1`
