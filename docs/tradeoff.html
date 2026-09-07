@@ -52,7 +52,6 @@
   strong{font-weight:600}
   section{display:flex;flex-direction:column;gap:16px}
 
-  /* dải xuất xứ */
   .prov{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--rule);
         border-radius:3px;background:var(--surface);overflow:hidden}
   .prov div{flex:1 1 150px;padding:11px 15px;border-right:1px solid var(--rule)}
@@ -62,7 +61,6 @@
   .prov dd{margin:0;font-family:var(--mono);font-size:14px;font-weight:500;
            font-variant-numeric:tabular-nums}
 
-  /* phát hiện chính */
   .finding{border-left:3px solid var(--naive);background:var(--surface);
            padding:18px 22px;border-radius:0 3px 3px 0}
   .finding .num{font-family:var(--mono);font-size:30px;font-weight:600;
@@ -73,7 +71,7 @@
   figcaption{font-size:13.5px;color:var(--ink-2);margin-top:12px;
              padding-top:12px;border-top:1px solid var(--rule);max-width:none}
   .chartbox{overflow-x:auto}
-  svg{display:block;width:100%;height:auto;min-width:560px}
+  svg{display:block;width:100%;height:auto;min-width:580px}
 
   .ax{fill:var(--ink-2);font-family:var(--mono);font-size:11px;font-weight:500}
   .axname{fill:var(--ink-3);font-family:var(--mono);font-size:10.5px;
@@ -81,16 +79,18 @@
   .anno{font-family:var(--mono);font-size:11.5px;font-weight:500}
   .grid{stroke:var(--rule);stroke-width:1}
   .axis{stroke:var(--rule-2);stroke-width:1}
+  .pull{stroke:var(--ink-3);stroke-width:1.6;opacity:.75}
 
   .key{display:flex;flex-wrap:wrap;gap:14px 22px;font-family:var(--mono);
        font-size:12px;color:var(--ink-2);margin-top:2px}
   .key span{display:flex;align-items:center;gap:7px}
   .sw{width:20px;height:0;border-top-width:2.5px;border-top-style:solid;flex:none}
+  .dot{width:9px;height:9px;border-radius:50%;flex:none}
 
   .tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:4px;
              background:var(--surface)}
   table{border-collapse:collapse;width:100%;font-family:var(--mono);
-        font-size:13px;font-variant-numeric:tabular-nums;min-width:600px}
+        font-size:13px;font-variant-numeric:tabular-nums;min-width:560px}
   caption{text-align:left;font-family:var(--sans);font-size:13.5px;color:var(--ink-2);
           padding:14px 16px 10px}
   th,td{padding:7px 14px;text-align:right;border-bottom:1px solid var(--rule);
@@ -100,7 +100,6 @@
   th:first-child,td:first-child{text-align:left}
   tbody tr:last-child td{border-bottom:0}
   tr.mark td{background:var(--naive-soft)}
-  tr.knee td{box-shadow:inset 0 2px 0 var(--honest)}
   .neg{color:var(--alarm)}
   .free{color:var(--honest)}
   .dim{color:var(--ink-3)}
@@ -108,8 +107,8 @@
   .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
   .note{background:var(--sunk);border-radius:4px;padding:16px 18px;font-size:14px}
   .note h3{margin-bottom:6px}
-  ul{margin:0;padding-left:1.15em}
-  li{margin-bottom:5px}
+  ol{margin:0;padding-left:1.3em}
+  li{margin-bottom:6px}
   li:last-child{margin-bottom:0}
   footer{border-top:1px solid var(--rule);padding-top:18px;font-size:13px;
          color:var(--ink-3);font-family:var(--mono)}
@@ -118,351 +117,267 @@
 <div class="wrap">
 
   <header>
-    <div class="eyebrow">Nén 3D Gaussian Splatting · GTX 1650 Ti 4 GB</div>
+    <div class="eyebrow">Nén 3D Gaussian Splatting · GTX 1650 Ti 4 GB · v0.9.0</div>
     <h1>Ảo giác nén 3DGS</h1>
-    <p class="lede">Cắt 66% số hạt rồi tinh chỉnh lại, model trông <em>tốt hơn</em> bản gốc
-      0,26 dB. Nhưng model không cắt gì, tinh chỉnh đúng bằng đó bước, còn tốt hơn nữa.
-      Đây là đường cong đánh đổi khi đã trừ phần công đó ra.</p>
+    <p class="lede">Cắt bớt Gaussian rồi tinh chỉnh lại, model trông tốt hơn bản gốc. Nhưng model
+      <em>không cắt gì</em>, tinh chỉnh đúng bằng đó bước, còn tốt hơn nữa — vì công thức tinh chỉnh
+      kéo mọi thứ về cùng một điểm dừng, bất kể xuất phát từ đâu.</p>
   </header>
 
   <dl class="prov">
     <div><dt>Scene</dt><dd>train · truck-864k</dd></div>
-    <div><dt>Lần chạy</dt><dd>27 · ~7,5 giờ</dd></div>
+    <div><dt>Lần chạy</dt><dd>36 · ~9 giờ</dd></div>
     <div><dt>Trần VRAM đo được</dt><dd>3440 MiB</dd></div>
-    <div><dt>Ngày</dt><dd>2026-09-05</dd></div>
+    <div><dt>Đã tự rút lại</dt><dd>4 lần</dd></div>
   </dl>
 
   <section class="finding">
     <div class="num">+0,3587 dB</div>
-    <h3>là công của “tinh chỉnh thêm”, không phải của nén</h3>
+    <h3>là công của “tinh chỉnh thêm”, trong tổng +0,3667 mà cách so thông thường báo cáo</h3>
     <p style="margin:6px 0 0;color:var(--ink-2);font-size:14.5px">
-      Đo bằng nhánh đối chứng: không cắt hạt nào, chạy đúng 5000 bước như nhánh nén,
-      trung bình 3 seed. Mọi so sánh với checkpoint gốc đều cộng sẵn khoản này vào cho nén.</p>
+      Đo bằng nhánh đối chứng: không cắt hạt nào, chạy đúng 5000 bước như nhánh nén, 3 seed.
+      Chi phí nén thật chỉ còn <strong>+0,0080 dB</strong>. Phép phân tách
+      <span style="font-family:var(--mono)">ngây thơ = chi phí nén + lợi ích luyện thêm</span>
+      là phép cộng trừ luôn đúng; phần <em>thực nghiệm</em> là <strong>độ lớn</strong> của số hạng
+      thứ hai — nó có thể đã gần 0, và không hề gần 0.</p>
   </section>
 
   <section>
-    <h2>Prune phá bao nhiêu, phục hồi lấy lại bao nhiêu</h2>
-    <p>Cắt hạt gây thiệt hại gần như tuyến tính, rồi 5000 bước phục hồi kéo lại phần lớn —
-      nhưng khả năng kéo lại có giới hạn. Từ mức cắt 80% trở đi, khoảng cách giữa hai đường
-      không còn khép lại được.</p>
+    <h2>Cơ chế: điểm dừng là một attractor</h2>
+    <p>Mỗi mũi tên dưới đây là một lần chạy: đuôi là chất lượng <strong>ngay sau khi cắt</strong>,
+      đầu là chất lượng <strong>sau 5000 bước phục hồi</strong>. Điểm xuất phát trải hơn
+      <strong>6,7 dB</strong>. Điểm dừng thì tụ lại một vạch — cho tới khi cắt quá sâu.</p>
 
     <figure>
       <div class="chartbox">
-      <svg viewBox="0 0 800 400" role="img" aria-label="Biểu đồ PSNR theo tỉ lệ cắt hạt">
+      <svg viewBox="0 0 800 440" role="img" aria-label="Điểm xuất phát và điểm dừng theo tỉ lệ cắt trên scene train">
+        <rect x="62" y="24" width="506" height="370" fill="var(--honest-soft)"/>
         <g class="grid">
-          <line x1="66" y1="61.8" x2="780" y2="61.8"/><line x1="66" y1="103.5" x2="780" y2="103.5"/>
-          <line x1="66" y1="145.3" x2="780" y2="145.3"/><line x1="66" y1="187" x2="780" y2="187"/>
-          <line x1="66" y1="228.8" x2="780" y2="228.8"/><line x1="66" y1="270.5" x2="780" y2="270.5"/>
-          <line x1="66" y1="312.3" x2="780" y2="312.3"/>
+          <line x1="62" y1="53.2" x2="778" y2="53.2"/><line x1="62" y1="101.9" x2="778" y2="101.9"/>
+          <line x1="62" y1="150.6" x2="778" y2="150.6"/><line x1="62" y1="199.3" x2="778" y2="199.3"/>
+          <line x1="62" y1="247.9" x2="778" y2="247.9"/><line x1="62" y1="296.6" x2="778" y2="296.6"/>
+          <line x1="62" y1="345.3" x2="778" y2="345.3"/>
         </g>
-        <line class="axis" x1="66" y1="354" x2="780" y2="354"/>
-        <line class="axis" x1="66" y1="20" x2="66" y2="354"/>
+        <line class="axis" x1="62" y1="394" x2="778" y2="394"/>
+        <line class="axis" x1="62" y1="24" x2="62" y2="394"/>
 
-        <!-- vạch mốc: đối chứng và checkpoint gốc (giá trị ghi ở chú giải dưới) -->
-        <line x1="66" y1="54.5" x2="780" y2="54.5" stroke="var(--honest)" stroke-width="1.5"/>
-        <line x1="66" y1="69.4" x2="780" y2="69.4" stroke="var(--naive)" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <line x1="62" y1="44.7" x2="778" y2="44.7" stroke="var(--honest)" stroke-width="1.6"/>
+        <line x1="568" y1="24" x2="568" y2="394" stroke="var(--naive)" stroke-width="1.4" stroke-dasharray="5 4"/>
 
-        <!-- đường: sau khi phục hồi -->
-        <polyline fill="none" stroke="var(--honest)" stroke-width="2.5" stroke-linejoin="round"
-          points="66,54.4 256.4,54.8 351.6,54.3 446.8,56.3 503.9,58.6 542,61.3 637.2,75.9 732.4,111.1 780,156.5"/>
-        <!-- đường: ngay sau khi cắt, chưa phục hồi -->
-        <polyline fill="none" stroke="var(--ink-3)" stroke-width="2" stroke-dasharray="6 4"
-          stroke-linejoin="round"
-          points="66,69.5 256.4,72.3 351.6,79.7 446.8,97.7 503.9,117.4 542,134.6 637.2,193.5 732.4,281.7 780,349.6"/>
-
-        <g fill="var(--honest)">
-          <circle cx="66" cy="54.4" r="3.2"/><circle cx="256.4" cy="54.8" r="3.2"/>
-          <circle cx="351.6" cy="54.3" r="3.2"/><circle cx="446.8" cy="56.3" r="3.2"/>
-          <circle cx="503.9" cy="58.6" r="4.2"/><circle cx="542" cy="61.3" r="3.2"/>
-          <circle cx="637.2" cy="75.9" r="3.2"/><circle cx="732.4" cy="111.1" r="3.2"/>
-          <circle cx="780" cy="156.5" r="3.2"/>
+        <g class="pull">
+          <line x1="62" y1="62.2" x2="62" y2="44.7"/>
+          <line x1="213" y1="62.2" x2="213" y2="44.7"/>
+          <line x1="364" y1="65.6" x2="364" y2="45.1"/>
+          <line x1="439" y1="74.2" x2="439" y2="44.5"/>
+          <line x1="514" y1="95.2" x2="514" y2="46.8"/>
+          <line x1="559" y1="118.1" x2="559" y2="49.5"/>
+          <line x1="590" y1="138.1" x2="590" y2="52.6"/>
+          <line x1="665" y1="202.9" x2="665" y2="69.7"/>
+          <line x1="740" y1="309.7" x2="740" y2="110.8"/>
+          <line x1="778" y1="388.8" x2="778" y2="163.7"/>
         </g>
+
         <g fill="var(--ink-3)">
-          <circle cx="66" cy="69.5" r="2.6"/><circle cx="256.4" cy="72.3" r="2.6"/>
-          <circle cx="351.6" cy="79.7" r="2.6"/><circle cx="446.8" cy="97.7" r="2.6"/>
-          <circle cx="503.9" cy="117.4" r="2.6"/><circle cx="542" cy="134.6" r="2.6"/>
-          <circle cx="637.2" cy="193.5" r="2.6"/><circle cx="732.4" cy="281.7" r="2.6"/>
-          <circle cx="780" cy="349.6" r="2.6"/>
+          <circle cx="62" cy="62.2" r="3"/><circle cx="213" cy="62.2" r="3"/>
+          <circle cx="364" cy="65.6" r="3"/><circle cx="439" cy="74.2" r="3"/>
+          <circle cx="514" cy="95.2" r="3"/><circle cx="559" cy="118.1" r="3"/>
+          <circle cx="590" cy="138.1" r="3"/><circle cx="665" cy="202.9" r="3"/>
+          <circle cx="740" cy="309.7" r="3"/><circle cx="778" cy="388.8" r="3"/>
         </g>
+        <g fill="var(--honest)">
+          <circle cx="62" cy="44.7" r="4.2"/><circle cx="213" cy="44.7" r="4.2"/>
+          <circle cx="364" cy="45.1" r="4.2"/><circle cx="439" cy="44.5" r="4.2"/>
+          <circle cx="514" cy="46.8" r="4.2"/><circle cx="559" cy="49.5" r="4.2"/>
+          <circle cx="590" cy="52.6" r="4.2"/><circle cx="665" cy="69.7" r="4.2"/>
+          <circle cx="740" cy="110.8" r="4.2"/><circle cx="778" cy="163.7" r="4.2"/>
+        </g>
+
+        <text class="anno" x="72" y="38" fill="var(--honest)">attractor 22,174</text>
+        <text class="anno" x="576" y="242" fill="var(--naive)">biên miền hút</text>
+        <text class="anno" x="576" y="258" fill="var(--naive)">cắt 67,19%</text>
+        <text class="anno" x="72" y="382" fill="var(--ink-3)">MIỀN HÚT — mọi điểm dừng về cùng một vạch</text>
 
         <g class="ax" text-anchor="end">
-          <text x="58" y="65.8">22,0</text><text x="58" y="107.5">21,0</text>
-          <text x="58" y="149.3">20,0</text><text x="58" y="191">19,0</text>
-          <text x="58" y="232.8">18,0</text><text x="58" y="274.5">17,0</text>
-          <text x="58" y="316.3">16,0</text><text x="58" y="358">15,0</text>
+          <text x="54" y="57.2">22</text><text x="54" y="105.9">21</text>
+          <text x="54" y="154.6">20</text><text x="54" y="203.3">19</text>
+          <text x="54" y="251.9">18</text><text x="54" y="300.6">17</text>
+          <text x="54" y="349.3">16</text><text x="54" y="398">15</text>
         </g>
         <g class="ax" text-anchor="middle">
-          <text x="66" y="374">20</text><text x="256.4" y="374">40</text>
-          <text x="351.6" y="374">50</text><text x="446.8" y="374">60</text>
-          <text x="503.9" y="374">66</text><text x="542" y="374">70</text>
-          <text x="637.2" y="374">80</text><text x="732.4" y="374">90</text>
-          <text x="780" y="374">95</text>
+          <text x="62" y="414">0</text><text x="213" y="414">20</text>
+          <text x="364" y="414">40</text><text x="439" y="414">50</text>
+          <text x="514" y="414">60</text><text x="590" y="414">70</text>
+          <text x="665" y="414">80</text><text x="740" y="414">90</text>
+          <text x="778" y="414">95</text>
         </g>
-        <text class="axname" x="423" y="393" text-anchor="middle">tỉ lệ cắt hạt (%)</text>
-        <text class="axname" x="66" y="12" text-anchor="start">PSNR (dB)</text>
+        <text class="axname" x="420" y="433" text-anchor="middle">tỉ lệ cắt hạt (%)</text>
+        <text class="axname" x="62" y="14" text-anchor="start">PSNR (dB) · scene train</text>
       </svg>
       </div>
       <div class="key">
-        <span><i class="sw" style="border-top-color:var(--honest)"></i>sau 5000 bước phục hồi</span>
-        <span><i class="sw" style="border-top-color:var(--ink-3);border-top-style:dashed"></i>ngay sau khi cắt</span>
-        <span><i class="sw" style="border-top-color:var(--honest)"></i>mốc đối chứng 22,174</span>
-        <span><i class="sw" style="border-top-color:var(--naive);border-top-style:dashed"></i>mốc checkpoint gốc 21,816</span>
+        <span><i class="dot" style="background:var(--ink-3)"></i>ngay sau khi cắt</span>
+        <span><i class="dot" style="background:var(--honest)"></i>sau 5000 bước phục hồi</span>
+        <span><i class="sw" style="border-top-color:var(--honest)"></i>attractor 22,174</span>
+        <span><i class="sw" style="border-top-color:var(--naive);border-top-style:dashed"></i>biên miền hút</span>
       </div>
-      <figcaption>Ở mức cắt 95%, prune lấy đi 6,7 dB và phục hồi chỉ trả lại 4,6 dB.
-        Càng phá nhiều, phục hồi càng gắng sức — nhưng không bao giờ về lại được.</figcaption>
+      <figcaption>Cắt 95% lấy đi <strong>6,7 dB</strong>; phục hồi trả lại 4,6 — nhưng không về
+        được vạch. Trong miền hút, điểm xuất phát trải 1,56 dB còn điểm dừng chỉ trải 0,17 dB:
+        <strong>co lại 9,3 lần</strong>.</figcaption>
     </figure>
+
+    <p><strong>Ba con số phải đọc lại theo attractor.</strong> C1 chính là <em>khoảng cách từ
+      checkpoint tới điểm dừng</em> (22,1744 − 21,8157 = 0,3587). “Nén 50% miễn phí” là
+      <em>hai nhánh cùng rơi về một chỗ</em> — chênh +0,0080 nằm gọn trong nhiễu 0,0305 của chính
+      attractor. Và đầu gối không phải ngưỡng mất thông tin mà là <strong>biên của miền hút</strong>.</p>
   </section>
 
   <section>
-    <h2>Vùng ảo giác</h2>
-    <p>Phóng to khoảng cắt 20–80%. Dải tô là khoảng giữa hai mốc: <strong>trên</strong> là
-      đối chứng (thứ phải so), <strong>dưới</strong> là checkpoint gốc (thứ hay được so).
-      Đường nằm trong dải này thì <em>báo cáo kiểu thông thường sẽ nói “nén miễn phí hoặc tốt hơn”,
-      trong khi thực tế nó đã kém đi.</em></p>
+    <h2>Attractor là thật, và nó tái lập</h2>
+
+    <div class="cols">
+      <div class="note"><h3>Không phải artifact của learning rate</h3>
+        <p style="color:var(--ink-2)">Nghi ngờ nó do lịch anneal mà bản cài đặt này thêm vào.
+          Tắt anneal: attractor <strong>còn chặt hơn</strong> — co 16,1× thay vì 9,3×.
+          Anneal chỉ dịch chỗ nó (+0,153 dB) và giảm nhiễu 1,93×.</p></div>
+      <div class="note"><h3>Không phải tính chất của một scene</h3>
+        <p style="color:var(--ink-2)">Trên <span style="font-family:var(--mono)">truck-864k</span>:
+          co <strong>15,7×</strong>. ⇒ attractor là tính chất của <strong>công thức tinh chỉnh</strong>,
+          không phải của scene.</p></div>
+    </div>
+
+    <p>Nhưng <strong>bề rộng miền hút thì phụ thuộc model</strong> — và chênh nhau rất nhiều:</p>
 
     <figure>
       <div class="chartbox">
-      <svg viewBox="0 0 800 300" role="img" aria-label="Phóng to vùng ảo giác, tỉ lệ cắt 20 đến 80 phần trăm">
-        <rect x="66" y="58.3" width="714" height="123.5" fill="var(--naive-soft)"/>
-        <rect x="66" y="52.2" width="714" height="12.4" fill="var(--honest-soft)"/>
-
+      <svg viewBox="0 0 800 300" role="img" aria-label="Attractor trên scene truck-864k, miền hút hẹp hơn nhiều">
+        <rect x="62" y="24" width="298" height="232" fill="var(--honest-soft)"/>
         <g class="grid">
-          <line x1="66" y1="49.5" x2="780" y2="49.5"/><line x1="66" y1="118.4" x2="780" y2="118.4"/>
-          <line x1="66" y1="187.2" x2="780" y2="187.2"/>
+          <line x1="62" y1="45.1" x2="778" y2="45.1"/><line x1="62" y1="115.4" x2="778" y2="115.4"/>
+          <line x1="62" y1="185.7" x2="778" y2="185.7"/>
         </g>
-        <line class="axis" x1="66" y1="256" x2="780" y2="256"/>
-        <line class="axis" x1="66" y1="22" x2="66" y2="256"/>
+        <line class="axis" x1="62" y1="256" x2="778" y2="256"/>
+        <line class="axis" x1="62" y1="24" x2="62" y2="256"/>
 
-        <line x1="66" y1="58.3" x2="780" y2="58.3" stroke="var(--honest)" stroke-width="1.5"/>
-        <line x1="66" y1="181.8" x2="780" y2="181.8" stroke="var(--naive)" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <line x1="62" y1="33.8" x2="778" y2="33.8" stroke="var(--honest)" stroke-width="1.6"/>
+        <line x1="360" y1="24" x2="360" y2="256" stroke="var(--naive)" stroke-width="1.4" stroke-dasharray="5 4"/>
 
-        <polyline fill="none" stroke="var(--honest)" stroke-width="2.5" stroke-linejoin="round"
-          points="66,57.9 304,61.1 423,56.9 542,73.3 613.4,92.1 661,114.3 780,234.9"/>
+        <g class="pull">
+          <line x1="62" y1="37.1" x2="62" y2="33.8"/>
+          <line x1="205" y1="47.9" x2="205" y2="33.8"/>
+          <line x1="348" y1="75.0" x2="348" y2="35.1"/>
+          <line x1="492" y1="118.0" x2="492" y2="38.2"/>
+          <line x1="778" y1="254.7" x2="778" y2="54.5"/>
+        </g>
+        <g fill="var(--ink-3)">
+          <circle cx="62" cy="37.1" r="3"/><circle cx="205" cy="47.9" r="3"/>
+          <circle cx="348" cy="75.0" r="3"/><circle cx="492" cy="118.0" r="3"/>
+          <circle cx="778" cy="254.7" r="3"/>
+        </g>
         <g fill="var(--honest)">
-          <circle cx="66" cy="57.9" r="3.4"/><circle cx="304" cy="61.1" r="3.4"/>
-          <circle cx="423" cy="56.9" r="3.4"/><circle cx="542" cy="73.3" r="3.4"/>
-          <circle cx="613.4" cy="92.1" r="4.4"/><circle cx="661" cy="114.3" r="3.4"/>
-          <circle cx="780" cy="234.9" r="3.4"/>
+          <circle cx="62" cy="33.8" r="4.2"/><circle cx="205" cy="33.8" r="4.2"/>
+          <circle cx="348" cy="35.1" r="4.2"/><circle cx="492" cy="38.2" r="4.2"/>
+          <circle cx="778" cy="54.5" r="4.2"/>
         </g>
 
-        <line x1="542" y1="73.3" x2="542" y2="256" stroke="var(--honest)" stroke-width="1" stroke-dasharray="3 4"/>
-        <text class="anno" x="534" y="132" text-anchor="end" fill="var(--honest)">đầu gối</text>
-        <text class="anno" x="534" y="148" text-anchor="end" fill="var(--honest)">≈ 50–60%</text>
-
-        <text class="anno" x="774" y="46" text-anchor="end" fill="var(--honest)">đối chứng 22,174 ± nhiễu</text>
-        <text class="anno" x="76" y="120" fill="var(--naive)">DẢI ẢO GIÁC</text>
-        <text class="anno" x="76" y="136" fill="var(--naive)">trông như lãi, thật ra lỗ</text>
-        <text class="anno" x="76" y="177" fill="var(--naive)">checkpoint gốc 21,816</text>
+        <text class="anno" x="72" y="27" fill="var(--honest)">attractor 25,161</text>
+        <text class="anno" x="368" y="150" fill="var(--naive)">biên miền hút</text>
+        <text class="anno" x="368" y="166" fill="var(--naive)">chỉ cắt 20,81%</text>
 
         <g class="ax" text-anchor="end">
-          <text x="58" y="53.5">22,20</text><text x="58" y="122.4">22,00</text>
-          <text x="58" y="191.2">21,80</text><text x="58" y="260">21,60</text>
+          <text x="54" y="49.1">25</text><text x="54" y="119.4">24</text>
+          <text x="54" y="189.7">23</text><text x="54" y="260">22</text>
         </g>
         <g class="ax" text-anchor="middle">
-          <text x="66" y="276">20</text><text x="304" y="276">40</text>
-          <text x="423" y="276">50</text><text x="542" y="276">60</text>
-          <text x="613.4" y="276">66</text><text x="661" y="276">70</text>
-          <text x="780" y="276">80</text>
+          <text x="62" y="276">0</text><text x="205" y="276">10</text>
+          <text x="348" y="276">20</text><text x="492" y="276">30</text>
+          <text x="778" y="276">50</text>
         </g>
-        <text class="axname" x="423" y="295" text-anchor="middle">tỉ lệ cắt hạt (%)</text>
-        <text class="axname" x="66" y="14" text-anchor="start">PSNR (dB)</text>
+        <text class="axname" x="420" y="295" text-anchor="middle">tỉ lệ cắt hạt (%)</text>
+        <text class="axname" x="62" y="14" text-anchor="start">PSNR (dB) · scene truck-864k</text>
       </svg>
       </div>
-      <figcaption>Dải hẹp quanh mốc đối chứng là ±0,018 dB — nhiễu thật, đo bằng 3 seed.
-        Ba điểm 20%, 40%, 50% nằm <em>trong</em> dải đó, nên <strong>xét theo PSNR</strong> thì
-        chưa phân biệt được với 0. Nhưng đó là kết luận của riêng PSNR — xem phần dưới.</figcaption>
+      <figcaption><span style="font-family:var(--mono)">truck-864k</span> vốn <strong>đã bị nén
+        66%</strong> một lần, nên còn ít dư thừa để cắt tiếp — miền hút thu hẹp từ 67,19% xuống
+        <strong>20,81%</strong>. Điều này định lượng trực giác “nén cái đã nén thì đắt hơn”.</figcaption>
     </figure>
-  </section>
 
-  <section>
-    <h2>Khi nào thì ảo giác xảy ra</h2>
-    <p>Chạy lại toàn bộ cặp đối chứng trên scene thứ hai — <span style="font-family:var(--mono)">truck</span>,
-      model 864.017 hạt <strong>đã được tinh chỉnh sẵn 5000 bước</strong>. Khác biệt then chốt giữa hai
-      scene không phải nội dung ảnh, mà là <em>model nền còn cách hội tụ bao xa</em>.</p>
-
-    <div class="tablewrap">
-      <table>
-        <caption>Cùng mức cắt 50% · 3 seed mỗi nhánh · ghép cặp theo seed</caption>
-        <thead><tr><th></th><th>train<br><span class="dim">checkpoint gốc, chưa tinh chỉnh</span></th>
-          <th>truck-864k<br><span class="dim">đã tinh chỉnh 5000 bước</span></th></tr></thead>
-        <tbody>
-          <tr><td>Riêng “luyện thêm”</td><td class="free">+0,3587 ± 0,0551</td>
-              <td class="free">+0,0475 ± 0,0110</td></tr>
-          <tr><td>Chi phí nén thật</td><td class="dim">+0,0080</td><td class="neg">−0,2946</td></tr>
-          <tr class="mark"><td>Cách so ngây thơ</td><td class="free">+0,3667 &nbsp;“tốt hơn!”</td>
-              <td class="neg">−0,2471 &nbsp;đã âm sẵn</td></tr>
-          <tr><td><strong>Có ảo giác?</strong></td><td class="neg"><strong>CÓ</strong></td>
-              <td class="free"><strong>KHÔNG</strong></td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <p>Hiệu ứng “luyện thêm” <strong>teo 7,6 lần</strong> trên model đã hội tụ — và teo nhất quán ở
-      cả ba thước đo (7,6× · 7,8× · 3,7×), nên không phải chuyện riêng của PSNR.
-      <strong>Confound không phải hằng số; nó là hàm của khoảng cách tới hội tụ.</strong></p>
-
-    <div class="finding">
-      <h3>Quy tắc dự đoán</h3>
+    <div class="finding" style="border-left-color:var(--honest)">
+      <h3 style="color:var(--honest)">Hệ quả cho cách phát biểu</h3>
       <p style="margin:6px 0 0;color:var(--ink-2);font-size:14.5px">
-        Ghép hai dòng đầu của bảng lại thì ảo giác không còn là chuyện quan sát được — nó thành thứ
-        <strong>nói trước được</strong>:</p>
-      <p style="margin:10px 0 0;font-family:var(--mono);font-size:14px;line-height:1.9">
-        ảo giác xuất hiện ⟺ <strong>lợi ích luyện thêm &gt; chi phí nén</strong><br>
-        <span style="color:var(--naive)">train &nbsp; &nbsp;: +0,3587 &gt; 0,0080 → CÓ</span><br>
-        <span style="color:var(--honest)">truck-864k : +0,0475 &lt; 0,2946 → KHÔNG</span></p>
-      <p style="margin:10px 0 0;color:var(--ink-2);font-size:14.5px">
-        Ảo giác sống trên <strong>checkpoint chưa hội tụ ở tỉ lệ nén thấp</strong> — và biến mất khi
-        model đã hội tụ hoặc khi nén đủ sâu. Đó đúng là vùng vận hành mà phần lớn bài nén 3DGS báo cáo.</p>
-    </div>
-
-    <p style="font-size:13.5px;color:var(--ink-2)"><strong>Giới hạn:</strong> quy tắc này mới có
-      <strong>hai điểm dữ liệu</strong>. Nó đúng ở cả hai, nhưng hai điểm chưa đủ gọi là quy luật —
-      cần một điểm nằm ở vùng ranh giới để thử bác bỏ. Và scene 2 là model <em>đã nén</em>, không phải
-      checkpoint gốc: đó là model hợp lệ duy nhất chạy nổi cặp đối chứng trên card 4 GB.</p>
-  </section>
-
-  <section>
-    <h2>Ba thước đo không đồng ý đầu gối ở đâu</h2>
-    <p>Chạy thêm seed ở mức 50% và 60% để chốt ranh giới, rồi so <strong>ghép cặp theo từng
-      seed</strong> (cùng seed thì tác động lên cả hai nhánh như nhau, nên lấy hiệu sẽ khử được
-      phần lớn nhiễu). Kết quả: <em>ba thước đo cho ba câu trả lời khác nhau.</em></p>
-
-    <div class="tablewrap">
-      <table>
-        <caption>Chi phí nén thật · 3 seed mỗi mức · khoảng tin cậy 95%</caption>
-        <thead><tr><th>Cắt</th><th>PSNR</th><th>KTC 95%</th><th>SSIM</th><th>LPIPS</th><th>KTC LPIPS</th></tr></thead>
-        <tbody>
-          <tr><td>50%</td><td class="dim">+0,0080 ± 0,0324</td>
-              <td class="dim">[−0,073 … +0,088] chứa 0</td>
-              <td class="neg">−0,00158</td><td class="neg">+0,00573</td>
-              <td class="neg">[+0,00551 … +0,00595]</td></tr>
-          <tr><td>60%</td><td class="dim">−0,0343 ± 0,0267</td>
-              <td class="dim">[−0,101 … +0,032] chứa 0</td>
-              <td class="neg">−0,00608</td><td class="neg">+0,01478</td>
-              <td class="neg">[+0,01460 … +0,01495]</td></tr>
-          <tr><td>66%</td><td class="neg">−0,0881 ± 0,0181</td>
-              <td class="neg">[−0,133 … −0,043]</td>
-              <td class="neg">−0,01186</td><td class="neg">+0,02447</td>
-              <td class="neg">[+0,02410 … +0,02484]</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="cols">
-      <div class="note"><h3>PSNR nói: miễn phí tới 60%</h3>
-        <p style="color:var(--ink-2)">Khoảng tin cậy còn chứa 0 ở cả 50% và 60%.</p></div>
-      <div class="note"><h3>SSIM và LPIPS nói: đã tốn từ 50%</h3>
-        <p style="color:var(--ink-2)">Và nói <strong>chắc chắn</strong> — LPIPS ở 50% lớn gấp
-          <strong>38 lần</strong> nhiễu của chính nó.</p></div>
-    </div>
-
-    <div class="finding" style="border-left-color:var(--alarm)">
-      <h3 style="color:var(--alarm)">Rút lại: “nén miễn phí tới 2×”</h3>
-      <p style="margin:6px 0 0;color:var(--ink-2);font-size:14.5px">
-        Phát biểu đó dựa <strong>chỉ vào PSNR</strong>, và sai theo hai cách. Nó nhầm
-        <em>“chưa chứng minh được khác 0”</em> thành <em>“bằng 0”</em> — với 3 mẫu thì khoảng tin cậy
-        rất rộng, đó là thiếu lực thống kê chứ không phải bằng chứng không có hiệu ứng. Và nó rút
-        kết luận từ đúng cái thước ồn nhất, dù chính dữ liệu ở đây đã chỉ ra điều đó.<br><br>
-        <strong>Phát biểu đúng: không mức nén nào thực sự miễn phí — PSNR chỉ là không nhìn thấy
-        hoá đơn.</strong> Theo LPIPS, vùng gần như không mất gì chỉ kéo tới khoảng 20–30% (~1,3×).</p>
-    </div>
-
-    <p style="font-size:13.5px;color:var(--ink-2)"><strong>Không thổi phồng:</strong>
-      “có ý nghĩa thống kê” không đồng nghĩa “mắt người thấy được”. LPIPS ở mức 50% tăng 0,00573
-      trên nền 0,21521 — tức <strong>+2,7% tương đối</strong>. Là thật, nhưng nhỏ; chưa có khảo sát
-      người xem nên chưa được nói là “nhìn thấy khác biệt”.</p>
-  </section>
-
-  <section>
-    <h2>PSNR nhìn không thấy thứ LPIPS thấy rõ</h2>
-    <p>Cùng một phép nén, ba thước đo cho ba câu trả lời khác nhau về việc “bắt đầu hỏng từ đâu”.
-      Cột σ là số lần độ lệch chuẩn — tức mức suy giảm lớn gấp mấy lần nhiễu của chính phép đo.</p>
-
-    <div class="tablewrap">
-      <table>
-        <caption>Độ nhạy phát hiện suy giảm, so với nhánh đối chứng</caption>
-        <thead><tr><th>Cắt</th><th>PSNR</th><th>σ</th><th>SSIM</th><th>σ</th><th>LPIPS</th><th>σ</th></tr></thead>
-        <tbody>
-          <tr><td>20%</td><td class="dim">+0,0013</td><td class="dim">0,1</td>
-              <td class="dim">+0,00026</td><td class="dim">4,3</td>
-              <td class="dim">−0,00009</td><td class="dim">0,6</td></tr>
-          <tr class="mark"><td>40%</td><td class="dim">−0,0081</td><td class="dim">0,4</td>
-              <td class="dim">−0,00010</td><td class="dim">1,7</td>
-              <td class="neg">+0,00156</td><td class="neg">10,4</td></tr>
-          <tr class="mark"><td>50%</td><td class="dim">+0,0043</td><td class="dim">0,2</td>
-              <td class="neg">−0,00135</td><td class="neg">22,5</td>
-              <td class="neg">+0,00559</td><td class="neg">37,3</td></tr>
-          <tr class="knee"><td>60%</td><td>−0,0436</td><td>2,4</td>
-              <td class="neg">−0,00595</td><td class="neg">99,2</td>
-              <td class="neg">+0,01471</td><td class="neg">98,1</td></tr>
-          <tr><td>66%</td><td class="neg">−0,0980</td><td class="neg">5,4</td>
-              <td class="neg">−0,01177</td><td class="neg">196</td>
-              <td class="neg">+0,02426</td><td class="neg">162</td></tr>
-          <tr><td>70%</td><td class="neg">−0,1625</td><td class="neg">9,0</td>
-              <td class="neg">−0,01758</td><td class="neg">293</td>
-              <td class="neg">+0,03318</td><td class="neg">221</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="cols">
-      <div class="note"><h3>LPIPS bắt được ở 40%</h3>
-        <p style="color:var(--ink-2)">Suy giảm lớn gấp <strong>10 lần</strong> nhiễu của nó.
-          Không thể nhầm.</p></div>
-      <div class="note"><h3>SSIM bắt được ở 50%</h3>
-        <p style="color:var(--ink-2)">Gấp <strong>22 lần</strong> nhiễu.</p></div>
-      <div class="note"><h3>PSNR phải tới 66%</h3>
-        <p style="color:var(--ink-2)">Chậm hơn LPIPS <strong>26 điểm phần trăm</strong> —
-          mà PSNR mới là con số hay lên tiêu đề.</p></div>
+        <strong>Không có con số “nén tới X% là miễn phí” dùng chung được.</strong> Vùng miễn phí là
+        miền hút của công thức tinh chỉnh <em>trên model đang xét</em>, rộng hẹp theo lượng dư thừa
+        còn lại. Và nó <strong>không suy ra được từ model tĩnh</strong>: chúng tôi thử dự đoán biên
+        miền hút từ phân bố điểm quan trọng — trên trục “khối lượng quan trọng bị cắt” hai model còn
+        <em>xa nhau hơn</em> (3,76× so với 3,23×). Nó phụ thuộc khả năng bù trừ trong lúc tối ưu,
+        thứ chỉ lộ ra khi thực sự chạy.</p>
     </div>
   </section>
 
   <section>
-    <h2>Toàn bộ số liệu</h2>
+    <h2>PSNR không đủ nhạy để trả lời câu hỏi trung tâm</h2>
+    <p>Tỉ lệ tín hiệu trên nhiễu của chi phí nén, đo qua 3 seed:</p>
+
     <div class="tablewrap">
       <table>
-        <caption>9 mức cắt · seed 0 · so với checkpoint gốc 21,8157 và đối chứng 22,1744 dB</caption>
-        <thead><tr><th>Cắt</th><th>Hạt còn lại</th><th>MB</th><th>Nén</th>
-          <th>Sau cắt</th><th>Phục hồi</th><th>So gốc</th><th>So đối chứng</th></tr></thead>
+        <caption>|hiệu| chia cho độ lệch chuẩn giữa các seed, ở mức cắt 50%</caption>
+        <thead><tr><th></th><th>train</th><th>truck-864k</th></tr></thead>
         <tbody>
-          <tr><td>20%</td><td>821.206</td><td>203,66</td><td>1,25×</td><td>21,814</td><td>22,176</td><td>+0,360</td><td class="free">+0,001</td></tr>
-          <tr class="mark"><td>40%</td><td>615.905</td><td>152,75</td><td>1,67×</td><td>21,746</td><td>22,166</td><td>+0,351</td><td class="free">−0,008</td></tr>
-          <tr><td>50%</td><td>513.254</td><td>127,29</td><td>2,00×</td><td>21,569</td><td>22,179</td><td>+0,363</td><td class="free">+0,004</td></tr>
-          <tr class="knee mark"><td>60%</td><td>410.603</td><td>101,83</td><td>2,50×</td><td>21,138</td><td>22,131</td><td>+0,315</td><td>−0,044</td></tr>
-          <tr class="mark"><td>66%</td><td>349.013</td><td>86,56</td><td>2,94×</td><td>20,668</td><td>22,076</td><td>+0,261</td><td class="neg">−0,098</td></tr>
-          <tr class="mark"><td>70%</td><td>307.953</td><td>76,37</td><td>3,33×</td><td>20,256</td><td>22,012</td><td>+0,196</td><td class="neg">−0,163</td></tr>
-          <tr><td>80%</td><td>205.302</td><td>50,92</td><td>5,00×</td><td>18,844</td><td>21,661</td><td class="neg">−0,155</td><td class="neg">−0,513</td></tr>
-          <tr><td>90%</td><td>102.651</td><td>25,46</td><td>10,0×</td><td>16,732</td><td>20,818</td><td class="neg">−0,998</td><td class="neg">−1,357</td></tr>
-          <tr><td>95%</td><td>51.326</td><td>12,73</td><td>20,0×</td><td>15,107</td><td>19,730</td><td class="neg">−2,085</td><td class="neg">−2,444</td></tr>
+          <tr><td>PSNR</td><td class="neg">0,2×</td><td>58,0×</td></tr>
+          <tr><td>SSIM</td><td>7,9×</td><td>153,0×</td></tr>
+          <tr class="mark"><td>LPIPS</td><td class="free">64,9×</td><td class="free">378,5×</td></tr>
         </tbody>
       </table>
     </div>
-    <p style="font-size:13.5px;color:var(--ink-2)">Hàng tô nền là vùng ảo giác: cột
-      “so gốc” dương nhưng “so đối chứng” âm. Số hạt còn lại khớp <em>chính xác</em> giá trị
-      dự đoán trước khi chạy ở cả 9 mức.</p>
+
+    <p>Ở <span style="font-family:var(--mono)">train</span>, chi phí nén 50% <strong>nhỏ hơn 5 lần
+      so với biến động giữa các seed của chính PSNR</strong> — nó không phải “cho thấy nén miễn phí”,
+      nó <em>không có khả năng trả lời</em>. Cùng dữ liệu đó, LPIPS kết luận dứt khoát là tốn.
+      Thứ tự LPIPS &gt; SSIM &gt; PSNR tái lập ở cả hai scene. Mà PSNR mới là con số hầu hết bài báo
+      đặt lên tiêu đề.</p>
+  </section>
+
+  <section>
+    <h2>Dự án đã tự rút lại bốn lần</h2>
+    <p>Ghi công khai vì đó là một phần của kết quả, không phải điều cần giấu — và vì một dự án về
+      khả năng tái lập thì không thể giấu.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Phát biểu</th><th>Vì sao sai</th><th>v.</th></tr></thead>
+        <tbody>
+          <tr><td style="white-space:normal">“Nén còn làm model tốt hơn +0,112 dB”</td>
+              <td style="white-space:normal;text-align:left">tính công của luyện thêm thành công của nén</td><td>0.3.0</td></tr>
+          <tr><td style="white-space:normal">“Nén miễn phí tới 2,00×”</td>
+              <td style="white-space:normal;text-align:left">chỉ dựa PSNR; nhầm <em>“chưa chứng minh được khác 0”</em> thành <em>“bằng 0”</em></td><td>0.4.0</td></tr>
+          <tr><td style="white-space:normal">“Quy tắc dự đoán ảo giác”</td>
+              <td style="white-space:normal;text-align:left">là đồng nhất thức đại số — không thí nghiệm nào bác bỏ được</td><td>0.5.1</td></tr>
+          <tr><td style="white-space:normal">“Anneal tạo ra attractor”</td>
+              <td style="white-space:normal;text-align:left">nhầm phân tán-giữa-seed với phân tán-giữa-điểm-xuất-phát</td><td>0.7.0</td></tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 
   <section>
     <h2>Cách đo</h2>
     <div class="cols">
       <div class="note"><h3>Nhánh đối chứng</h3>
-        <p style="color:var(--ink-2)">Giống hệt nhánh nén, khác đúng một thứ: prune không
-          bao giờ chạy. Cùng seed, cùng lịch learning rate, cùng số bước. Điểm xuất phát
-          của mọi lần chạy trùng nhau tới 15 chữ số thập phân.</p></div>
+        <p style="color:var(--ink-2)">Giống hệt nhánh nén, khác đúng một thứ: prune không chạy.
+          Điểm xuất phát của mọi lần chạy trùng nhau tới 15 chữ số thập phân.</p></div>
       <div class="note"><h3>Thanh sai số</h3>
-        <p style="color:var(--ink-2)">3 seed × 2 nhánh. Nhiễu của phần cứng riêng nó
-          (chạy lại y hệt) là 0,008 dB; nhiễu ghép cặp qua các seed là 0,018 dB.</p></div>
+        <p style="color:var(--ink-2)">3 seed mỗi nhánh. Nhiễu phần cứng riêng nó là 0,008 dB;
+          nhiễu ghép cặp qua các seed là 0,018 dB.</p></div>
       <div class="note"><h3>Còn thiếu</h3>
-        <p style="color:var(--ink-2)">Đường cong đánh đổi vẫn chỉ seed 0 (trừ ba mức 50/60/66%
-          đã có 3 seed). Scene 2 mới có một tỉ lệ nén. Và
-          <span style="font-family:var(--mono)">truck</span> nguyên bản vẫn không fine-tune nổi:
-          sàn bộ nhớ 2815 MiB của nó độc lập độ phân giải.</p></div>
+        <p style="color:var(--ink-2)">Nhiều điểm trên đường cong là n=1. Tiêu chí biên miền hút
+          (2× nhiễu) là quy ước. Hai scene, và scene thứ hai là model <em>đã nén</em> — model duy
+          nhất chạy nổi cặp đối chứng trên card 4 GB.</p></div>
     </div>
+    <p style="font-size:13.5px;color:var(--ink-2)"><strong>Không thổi phồng:</strong>
+      “có ý nghĩa thống kê” không đồng nghĩa “mắt người thấy được”. Chưa có khảo sát người xem.</p>
   </section>
 
   <footer>
-    LightGaussian v_important_score trên PUP 3D-GS · prune tại iteration 30001 ·
-    phục hồi tới 35000 · 38 view test · PSNR/SSIM/LPIPS đo trong vòng lặp, cùng mã cho mọi nhánh
+    LightGaussian v_important_score trên PUP 3D-GS · prune tại iteration 30001 · phục hồi tới 35000
+    · PSNR/SSIM/LPIPS đo trong vòng lặp, cùng mã cho mọi nhánh · mọi số tính lại từ CSV thô
   </footer>
 
 </div>
