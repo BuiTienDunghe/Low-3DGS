@@ -222,6 +222,86 @@ Chỉ giữ throttle thật (nhiệt / nguồn / HW slowdown).
 
 ---
 
+### EXP-025 — ✅ **Attractor KHÔNG do anneal tạo ra. Diễn giải EXP-024 của tôi SAI — và phát hiện chính mạnh lên**
+**Ngày:** 2026-09-08 · **Script:** `scripts/run_noanneal_sweep.sh` · **Dữ liệu:** `experiments/exp025_noanneal_sweep.csv`
+**Commit:** `b7750be7` · 3 lần chạy, seed 0, `L3DGS_NO_ANNEAL=1`
+
+**Giả thuyết đang kiểm (của EXP-024):** attractor là do `ExponentialLR` mà PUP thêm vào tạo ra.
+Nếu đúng thì *"vùng nén miễn phí"* là tính chất của **công thức tinh chỉnh**, không phải của **phép nén**.
+
+**Phán quyết ghi trước khi chạy:** hệ số co ≤2 → do anneal · ≥5 → độc lập với anneal.
+
+#### Kết quả
+
+| cắt | \_\_\_\_ANNEAL BẬT\_\_\_\_ | | \_\_\_\_ANNEAL TẮT\_\_\_\_ | |
+|---|---|---|---|---|
+| | xuất phát | điểm dừng | xuất phát | điểm dừng |
+| 20% | 21.8144 | 22.1757 | 21.8144 | 22.0034 |
+| 50% | 21.5694 | 22.1787 | 21.5697 | 21.9963 |
+| 70% | 20.2556 | 22.0118 | 20.2586 | 21.9068 |
+| **trải** | **1.5588** | **0.1668** | **1.5557** | **0.0965** |
+| **co lại** | | **9.3×** | | **16.1×** |
+
+**Đo được 16.1× — vượt ngưỡng ≥5 đã ghi trước. GIẢ THUYẾT BỊ BÁC BỎ.**
+
+Không những attractor tồn tại khi tắt anneal, nó còn **chặt hơn**. Đối chiếu với nhiễu seed:
+
+| | trải điểm dừng | nhiễu seed (SD) | tỉ lệ |
+|---|---|---|---|
+| có anneal | 0.1668 | 0.0551 | 3.0× nhiễu — **có** phụ thuộc điểm xuất phát |
+| không anneal | 0.0965 | 0.1065 | **0.9× nhiễu — KHÔNG phát hiện được phụ thuộc** |
+
+Tắt anneal thì điểm xuất phát **hoàn toàn không còn ảnh hưởng** tới điểm dừng, ở mức nhiễu hiện có.
+
+#### Anneal làm gì, nếu không tạo ra attractor
+
+| | mức attractor | nhiễu seed (SD) |
+|---|---|---|
+| có anneal | 22.1221 | 0.0551 |
+| không anneal | 21.9688 | 0.1065 |
+| **anneal** | **nâng +0.1532 dB** | **giảm nhiễu 1.93×** |
+
+Anneal **dịch chỗ** attractor và **làm nó ổn định hơn giữa các lần chạy**, chứ không **tạo ra** nó.
+Hai phép đo độc lập khớp nhau: EXP-024 cho C1 không-anneal = +0.1587 ± 0.1065 (n=3, 0% cắt);
+EXP-025 cho 21.9688 − 21.8157 = **+0.1531** (n=1 × 3 mức cắt). Sai khác 0.006.
+
+#### 🔑 Phát hiện chính SỐNG SÓT, và mạnh hơn trước
+
+Tại mức cắt 50%, seed 0, **tắt anneal**:
+
+```
+ngây thơ   = 21.9963 − 21.8157 = +0.1806
+C1         = 21.9890 − 21.8157 = +0.1733     <- vẫn chiếm 96% của số ngây thơ
+chi phí nén= 21.9963 − 21.9890 = +0.0073
+```
+
+Cấu trúc ảo giác **giữ nguyên khi bỏ anneal**, chỉ nhỏ đi về độ lớn. Nghĩa là:
+
+> **Hiện tượng "cách so ngây thơ tính công của luyện thêm thành công của nén" KHÔNG phải
+> artifact của lịch learning rate mà PUP thêm vào.** Nó tồn tại cả khi dùng lịch LR của 3DGS gốc.
+
+Chuỗi phụ thuộc mà EXP-024 lo ngại — *"vùng miễn phí ← attractor ← anneal ← thứ PUP thêm vào"* —
+**đứt ở mắt xích cuối**. Điều còn lại phụ thuộc công thức chỉ là **mức** của attractor (±0.15 dB),
+không phải **sự tồn tại** của nó.
+
+#### Tự phê bình
+
+EXP-024 quan sát "SD tăng 1.93× khi tắt anneal" rồi tôi suy ra "anneal tạo ra attractor".
+**Sai lầm: nhầm hai loại phân tán.** EXP-024 đo phân tán **giữa các seed** ở *một* điểm xuất phát;
+attractor thì nói về phân tán **giữa các điểm xuất phát**. Hai đại lượng khác nhau, và chúng
+đi **ngược chiều nhau**: bỏ anneal làm tăng nhiễu seed nhưng lại **giảm** phụ thuộc điểm xuất phát.
+Suy luận từ cái này sang cái kia là không có cơ sở, và chỉ một thí nghiệm 50 phút mới lộ ra.
+
+#### Còn thiếu
+
+- EXP-025 là **n=1 mỗi mức cắt**. Kết luận "16.1×" dựa trên ba lần chạy đơn; con số chính xác
+  không tin được, nhưng **hướng** thì chắc vì nó vượt ngưỡng rất xa và trải điểm dừng còn nhỏ hơn
+  cả nhiễu seed.
+- Vẫn **một scene**. Attractor chưa được kiểm trên `truck`.
+- Vẫn chưa biết **biên miền hút** chính xác (nằm giữa 70% và 80% khi anneal bật).
+
+---
+
 ### EXP-024 — ⚖️ **Anneal learning rate chiếm ~56% của C1 — nhưng n=3 chưa đủ chứng minh.** Điều chắc chắn: anneal là thứ TẠO RA attractor
 **Ngày:** 2026-09-07 · **Script:** `scripts/run_noanneal.sh` · **Dữ liệu:** `experiments/exp024_noanneal.csv`
 **Patch:** `L3DGS_NO_ANNEAL` — xem `docs/REPO_PATCHES.md` mục 2b

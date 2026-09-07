@@ -14,6 +14,39 @@ khoa học**, không phải API.
 
 ---
 
+## [0.7.0] — 2026-09-08
+
+### Phát hiện
+- **EXP-023 — điểm dừng là một attractor.** Phân tích lại dữ liệu đã có, 0 phút GPU:
+  điểm xuất phát trải 1.5588 dB → điểm dừng trải 0.1668 dB, **co 9.3 lần**,
+  tụ về **22.1762 ± 0.0305** (n=9). Đọc lại ba con số:
+  C1 = khoảng cách từ checkpoint tới attractor; "nén 50% miễn phí" = hai nhánh cùng rơi
+  về một điểm dừng (+0.0080 nằm trong nhiễu 0.0305); **đầu gối = biên miền hút**.
+- **EXP-025 — attractor KHÔNG do anneal tạo ra.** Tắt `ExponentialLR` mà PUP thêm vào:
+  co lại **16.1×** (chặt hơn cả khi bật), trải điểm dừng 0.0965 < nhiễu seed 0.1065.
+  Anneal chỉ **dịch chỗ** attractor (+0.1532 dB) và giảm nhiễu 1.93×.
+  ⇒ **Cấu trúc ảo giác không phải artifact của lịch learning rate**: tắt anneal, ở mức cắt
+  50% C1 vẫn chiếm **96%** con số ngây thơ. Phát hiện chính mạnh lên.
+
+### Rút lại
+- **Diễn giải của EXP-024** ("anneal tạo ra attractor"). Sai vì **nhầm hai loại phân tán**:
+  EXP-024 đo phân tán giữa các *seed* ở một điểm xuất phát; attractor nói về phân tán giữa các
+  *điểm xuất phát*. Hai thứ đi ngược chiều nhau — bỏ anneal làm tăng cái thứ nhất nhưng **giảm**
+  cái thứ hai. EXP-025 (phán quyết ghi trước) bác bỏ.
+- **Thí nghiệm exp017** bị bác bỏ **trước khi chạy**: model đó nằm sẵn trên attractor nên kết quả
+  biết trước (~0.003), và n=3 cho nửa KTC ±0.137 dB — rộng hơn cả dải dự đoán.
+
+### Thêm
+- Patch `L3DGS_NO_ANNEAL` (`docs/REPO_PATCHES.md` mục 2b), mặc định không đổi hành vi gốc.
+- `scripts/run_noanneal.sh`, `scripts/run_noanneal_sweep.sh`.
+- EXP-024/025 là những lần chạy đầu tiên gắn được **commit thật**.
+
+### Đã biết còn khiếm khuyết
+- `tools/stamp_run.sh` báo `dirty: true` vì **chính lần chạy ghi file vào `experiments/`**.
+  Phép kiểm dirty phải loại trừ `experiments/`, nếu không không lần chạy nào sạch được.
+
+---
+
 ## [0.5.1] — 2026-09-07
 
 ### Rút lại
