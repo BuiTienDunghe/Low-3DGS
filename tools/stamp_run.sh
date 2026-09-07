@@ -55,7 +55,18 @@ stamp_one() {
   local b; b=$(git -C "$ROOT" rev-parse --abbrev-ref HEAD 2>/dev/null || echo "")
   [ "$b" = HEAD ] && b=""
   export SR_BRANCH="$b"
-  if [ -n "$(git -C "$ROOT" status --porcelain 2>/dev/null)" ]; then export SR_DIRTY=1; else export SR_DIRTY=0; fi
+  # Buộc git so NỘI DUNG, không tin stat cache. Trên /mnt/d (9p) git có thể báo
+  # SẠCH ngay sau khi file vừa bị sửa — false negative đúng ở chỗ nguy hiểm nhất.
+  git -C "$ROOT" update-index -q --really-refresh 2>/dev/null || true
+
+  # LOẠI TRỪ experiments/ khỏi phép kiểm bẩn: chính lần chạy ghi kết quả vào đó,
+  # nên nếu tính cả thì KHÔNG lần chạy nào có thể sạch — cờ dirty thành vô nghĩa.
+  # Cái ta cần biết là: MÃ NGUỒN lúc chạy có khớp commit không.
+  if [ -n "$(git -C "$ROOT" status --porcelain -- ':!experiments' 2>/dev/null)" ]; then
+    export SR_DIRTY=1
+  else
+    export SR_DIRTY=0
+  fi
 
   export SR_TP_NAME=$(basename "$THIRD_PARTY")
   export SR_TP_COMMIT=$(git -C "$THIRD_PARTY" rev-parse HEAD 2>/dev/null || echo "")
