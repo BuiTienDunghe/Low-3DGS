@@ -134,7 +134,15 @@ scripts/    các loạt chạy thí nghiệm, đều có cổng tiền kiểm
 src/memory/ bộ đếm bộ nhớ chính xác, profiler, killswitch
 tools/      công cụ đo và phân tích
 experiments/ số đo (*.csv, *.log, metric.csv) — model .ply KHÔNG lên git
+.claude/    skills/bao-cao   báo cáo trạng thái, tính lại từ dữ liệu thô
+            mods/low3dgs-guard  chặn chạy thí nghiệm khi cây bẩn hoặc GPU bận
 ```
+
+Hai công cụ trong `.claude/` sinh ra từ chính các lỗi đã mắc trong dự án:
+`bao-cao` tính lại số từ CSV rồi **đối chiếu** với tài liệu thay vì trích (nó đã bắt được
+sáu lỗi tài liệu và một lỗi suy luận ngay lần chạy đầu); `low3dgs-guard` chặn lệnh chạy
+thí nghiệm khi cây làm việc bẩn — **trước** khi script nạp ảnh, tức mất 0 phút chứ không
+phải 45. Bật mod: `claude --plugin-dir .claude/mods`.
 
 Dữ liệu thô (19 GB) và model (861 MB) không nằm trong repo; toàn bộ **số đo** thì có, ~600 KB.
 

@@ -1,0 +1,6 @@
+{
+  "name": "low3dgs-guard",
+  "version": "0.1.0",
+  "description": "Chặn chạy thí nghiệm khi cây làm việc bẩn hoặc GPU đang bận, và hiện trạng thái dự án Low-3DGS trên một dòng.",
+  "types": "./types/index.d.ts"
+}

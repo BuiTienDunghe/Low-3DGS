@@ -14,6 +14,19 @@ khoa học**, không phải API.
 
 ---
 
+## [0.9.1] — 2026-10-04
+
+### Thêm công cụ (không đổi kết luận nào)
+- **Mod `low3dgs-guard`** (`.claude/mods/`) — chặn lệnh `scripts/run_*.sh` khi cây làm việc
+  bẩn hoặc GPU đang bận, và hiện trạng thái dự án trên một dòng trên ô nhập.
+  Chặn xảy ra **trước** khi script nạp ảnh. Lối thoát có chủ ý: `ALLOW_DIRTY=1`.
+  Lý do tồn tại: trong một phiên làm việc đã ba lần suýt chạy loạt 45–100 phút trên cây bẩn,
+  khiến `run_meta.json` ghi `dirty: true` và kết quả không truy ngược được về commit nào.
+  Đã kiểm cả ba đường (cho qua / chặn / lối thoát).
+- `.claude-plugin/types/` không commit — file sinh theo build, tạo lại bằng `/plugin-types`.
+
+---
+
 ## [0.9.0] — 2026-09-08
 
 ### Thêm — biên miền hút nay là số đo được
