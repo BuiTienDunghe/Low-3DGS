@@ -1,0 +1,24 @@
+experiments/wsl_out/ — số đo vớt từ ~/l3dgs/out/ trước khi xóa máy (2026-11-15)
+================================================================================
+
+Các file này KHÔNG sinh ra từ scripts/ trong repo. Chúng nằm ở ~/l3dgs/out/ phía
+WSL, tức ngoài repo, nên chưa bao giờ lên git. Gom về đây lúc dọn máy.
+
+*_pup_cpu_r1_stages.jsonl  — đo thời gian/bộ nhớ từng CHẶNG của pipeline PUP,
+                             chạy ở chế độ CPU, -r 1. Có đủ bốn scene:
+                             drjohnson, playroom, train, truck.
+                             Đây là loạt khảo sát sớm, trước khi chốt quy ước CSV.
+
+memprobe_results.jsonl     — kết quả của tools/memprobe/probe_mem.py.
+
+CẢNH BÁO KHI TRÍCH SỐ
+---------------------
+Loạt này chạy CPU, không phải GPU, và trước EXP-015. Nghĩa là:
+
+  - số bộ nhớ ở đây KHÔNG so trực tiếp được với các số VRAM trong 05_EXPERIMENTS.md
+  - chúng có trước khi memprobe đo đỉnh từ trong tiến trình, nên chịu đúng khuyết
+    điểm mà EXP-015 kết luận 3 chỉ ra: lấy mẫu rời rạc chỉ cho CHẶN DƯỚI
+  - không có run_meta.json, nên không truy ngược được về commit nào
+
+Giữ lại vì chúng là dữ liệu thô duy nhất cho bốn scene ở mức pipeline, và vì xóa
+đi thì không ai dựng lại được. KHÔNG dùng để phát biểu kết luận.

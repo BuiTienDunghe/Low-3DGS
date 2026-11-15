@@ -1,0 +1,7 @@
+{"tag": "train_r1_full", "N": 1026508, "W": 980, "H": 545, "px": 534100, "resident_after_setup_MiB": 251.5, "peak_alloc_MiB": 1560.3, "peak_reserved_MiB": 1764.0}
+{"tag": "playroom_r1_n1026508", "N": 1026508, "W": 1264, "H": 832, "px": 1051648, "resident_after_setup_MiB": 251.3, "peak_alloc_MiB": 1480.6, "peak_reserved_MiB": 1524.0}
+{"tag": "playroom_r2_n1026508", "N": 1026508, "W": 632, "H": 416, "px": 262912, "resident_after_setup_MiB": 251.3, "peak_alloc_MiB": 1391.8, "peak_reserved_MiB": 1404.0}
+{"tag": "truck_r1_n1026508", "N": 1026508, "W": 979, "H": 546, "px": 534534, "resident_after_setup_MiB": 251.4, "peak_alloc_MiB": 1441.8, "peak_reserved_MiB": 1464.0}
+{"tag": "truck_r1_n1800000", "N": 1800000, "W": 979, "H": 546, "px": 534534, "resident_after_setup_MiB": 434.3, "peak_alloc_MiB": 2501.2, "peak_reserved_MiB": 2562.0}
+{"tag": "playroom_r1_n1222956_timed", "N": 1222956, "W": 1264, "H": 832, "px": 1051648, "resident_after_setup_MiB": 297.8, "peak_alloc_MiB": 1759.7, "peak_reserved_MiB": 1802.0, "s_per_iter": 0.1899}
+{"tag": "playroom_r2_n1222956_timed", "N": 1222956, "W": 632, "H": 416, "px": 262912, "resident_after_setup_MiB": 297.8, "peak_alloc_MiB": 1661.9, "peak_reserved_MiB": 1702.0, "s_per_iter": 0.1022}
