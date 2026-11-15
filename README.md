@@ -160,6 +160,12 @@ python tools/cross_scene.py              # so sánh chéo hai scene
 
 Mỗi lần chạy nên gắn phiên bản mã: `bash tools/stamp_run.sh experiments/<tên_run>`
 
+> **Dựng lại từ con số không:** [`docs/RESTORE.md`](docs/RESTORE.md).
+> Bản làm việc trên máy đã bị xóa ngày 2026-11-15 — repo này là bản duy nhất.
+> `datasets/` (19 GB) và 42 file `.ply` (900 MB) không có ở đây: dataset tải lại
+> được, `.ply` thì phải chạy lại GPU. **Mọi số đo thì còn đủ** — 818 KB trong
+> `experiments/`, gồm cả `run_meta.json` gắn từng lần chạy với commit.
+
 ---
 
 ## Giới hạn — đọc trước khi trích số
