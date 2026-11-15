@@ -1,0 +1,50 @@
+env: ARCH=7.5 MAX_JOBS=2 nvcc=release 12.6
+torch: 2.14.0+cu126
+
+########## BUILD simple-knn ##########
+18:52:20
+  Building wheel for simple_knn (pyproject.toml): finished with status 'done'
+  Created wheel for simple_knn: filename=simple_knn-0.0.0-cp312-cp312-linux_x86_64.whl size=3484797 sha256=859d5c7b33543157e639bf00e01f637164b1b26471cd5675e89f88cacdc51933
+  Stored in directory: /tmp/pip-ephem-wheel-cache-guf7gph7/wheels/0e/fe/44/733159a6a52ffff9a0e40713c93bf0ca6468adc244851dbd00
+Successfully built simple_knn
+Installing collected packages: simple_knn
+Successfully installed simple_knn-0.0.0
+  -> exit 0
+
+########## BUILD diff-gaussian-rasterization ##########
+18:54:14
+  Building wheel for diff_gaussian_rasterization (pyproject.toml): finished with status 'done'
+  Created wheel for diff_gaussian_rasterization: filename=diff_gaussian_rasterization-0.0.0-cp312-cp312-linux_x86_64.whl size=3661266 sha256=6e46b00e2863f9e0fc2381b343c30b78a58f755a066cb5d32ec43f0901b0c936
+  Stored in directory: /tmp/pip-ephem-wheel-cache-fashcx88/wheels/7e/8b/78/416fdad316f1833b0ec8100e83e697edbbc26d22a2ffbb5154
+Successfully built diff_gaussian_rasterization
+Installing collected packages: diff_gaussian_rasterization
+Successfully installed diff_gaussian_rasterization-0.0.0
+  -> exit 0
+
+########## BUILD compress-diff-gaussian-rasterization ##########
+18:56:13
+  Building wheel for compress_diff_gaussian_rasterization (pyproject.toml): finished with status 'done'
+  Created wheel for compress_diff_gaussian_rasterization: filename=compress_diff_gaussian_rasterization-0.0.0-cp312-cp312-linux_x86_64.whl size=3724806 sha256=eef18adacc6082336af1d4bcde78f84e325d028d497bf2af807de0ade99f6150
+  Stored in directory: /tmp/pip-ephem-wheel-cache-98oul64l/wheels/93/36/e9/6a6ca71077e6dce75f9b8953fd470a98423ff8de8dde3d09d2
+Successfully built compress_diff_gaussian_rasterization
+Installing collected packages: compress_diff_gaussian_rasterization
+Successfully installed compress_diff_gaussian_rasterization-0.0.0
+  -> exit 0
+
+########## BUILD rasterization_and_pup_fisher ##########
+18:58:11
+  Building wheel for rasterization_and_pup_fisher (pyproject.toml): finished with status 'done'
+  Created wheel for rasterization_and_pup_fisher: filename=rasterization_and_pup_fisher-0.0.0-cp312-cp312-linux_x86_64.whl size=3671527 sha256=ef5a787b5de4bf97ca312b3f73abee84b349cdb6eb4eba9d209d5e4c146e87d0
+  Stored in directory: /tmp/pip-ephem-wheel-cache-p3ohisvx/wheels/3b/f0/4a/602e51252112ea0cbbeb77b4e04bb6e217a5f3ccc1f173ef4e
+Successfully built rasterization_and_pup_fisher
+Installing collected packages: rasterization_and_pup_fisher
+Successfully installed rasterization_and_pup_fisher-0.0.0
+  -> exit 0
+
+########## VERIFY ##########
+  FAIL    simple_knn._C: ImportError: libc10.so: cannot open shared object file: No such file or directory
+  OK      diff_gaussian_rasterization
+  OK      compress_diff_gaussian_rasterization
+  OK      rasterization_and_pup_fisher
+19:00:18
+exit=0

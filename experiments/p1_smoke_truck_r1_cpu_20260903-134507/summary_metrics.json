@@ -1,0 +1,12 @@
+{
+  "samples": 151,
+  "wall_s": 76.6,
+  "vram_peak_mb": 1479.4,
+  "vram_mean_mb": 1314.2,
+  "rss_peak_gb": 2.104,
+  "temp_peak_c": 67,
+  "clock_min_mhz": 300,
+  "clock_max_mhz": 2100,
+  "throttled_frac": 0.146,
+  "clock_min_frac_of_max": 0.143
+}

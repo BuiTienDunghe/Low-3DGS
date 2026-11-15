@@ -26,6 +26,15 @@ experiments/*/*
 !experiments/*/metric.csv
 !experiments/*/cfg_args
 
+# SỐ ĐO bên trong thư mục run cũng phải giữ. Luật experiments/*/* ở trên đã vô
+# tình loại cả chúng — trái với chính nguyên tắc ghi ở đầu file. Phát hiện lúc
+# dọn máy 2026-11-15: 334 KB số đo chưa bao giờ lên git, trong đó có dữ liệu gốc
+# của phát hiện save_ply phình 13,35x (plyio/results.jsonl) và mẫu NVML thô.
+!experiments/*/*.json
+!experiments/*/*.jsonl
+!experiments/*/*.log
+!experiments/*/*.txt
+
 # cameras.json là tham số camera sinh lại được từ COLMAP, không phải kết quả
 experiments/*/cameras.json
 

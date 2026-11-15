@@ -1,0 +1,4 @@
+[16:43:06] start models.zip (14 GB) from repo-sam.inria.fr -> D:/low-3DGS/datasets/pretrained/
+http=200 size=14660630999 time=2380.380449s speed=6158944B/s
+[17:22:47] curl exit=0
+-rw-r--r-- 1 dungbui 197121 14660630999 Sep  2 17:22 models.zip

@@ -1,0 +1,1170 @@
+[
+  {
+    "method": "plyfile_full",
+    "key": "A",
+    "file_mb": 805.4,
+    "wall_s": 4.54,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 1.559,
+    "rss_end_gb": 0.033,
+    "peak_over_file": 1.96,
+    "tracemalloc_peak_gb": 0.743,
+    "useful_bytes_gb": 0.748,
+    "shapes": {
+      "xyz": [
+        3405153,
+        3
+      ],
+      "opacity": [
+        3405153,
+        1
+      ],
+      "scaling": [
+        3405153,
+        3
+      ],
+      "rotation": [
+        3405153,
+        4
+      ],
+      "f_dc": [
+        3405153,
+        3
+      ],
+      "f_rest": [
+        3405153,
+        45
+      ]
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\drjohnson\\point_cloud\\iteration_30000\\point_cloud.ply",
+    "n_gaussians": 3405153,
+    "n_props": 62
+  },
+  {
+    "method": "plyfile_only",
+    "key": "B",
+    "file_mb": 805.4,
+    "wall_s": 0.58,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 0.036,
+    "rss_end_gb": 0.034,
+    "peak_over_file": 0.02,
+    "tracemalloc_peak_gb": 0.007,
+    "useful_bytes_gb": 0.786,
+    "shapes": {
+      "count": 3405153,
+      "props": 62
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\drjohnson\\point_cloud\\iteration_30000\\point_cloud.ply",
+    "n_gaussians": 3405153,
+    "n_props": 62
+  },
+  {
+    "method": "numpy_direct",
+    "key": "C",
+    "file_mb": 805.4,
+    "wall_s": 4.32,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 1.571,
+    "rss_end_gb": 0.033,
+    "peak_over_file": 1.97,
+    "tracemalloc_peak_gb": 1.542,
+    "useful_bytes_gb": 0.748,
+    "shapes": {
+      "xyz": [
+        3405153,
+        3
+      ],
+      "opacity": [
+        3405153,
+        1
+      ],
+      "scaling": [
+        3405153,
+        3
+      ],
+      "rotation": [
+        3405153,
+        4
+      ],
+      "f_dc": [
+        3405153,
+        3
+      ],
+      "f_rest": [
+        3405153,
+        45
+      ]
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\drjohnson\\point_cloud\\iteration_30000\\point_cloud.ply",
+    "n_gaussians": 3405153,
+    "n_props": 62
+  },
+  {
+    "method": "numpy_mmap",
+    "key": "D",
+    "file_mb": 805.4,
+    "wall_s": 4.76,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 1.572,
+    "rss_end_gb": 0.033,
+    "peak_over_file": 1.97,
+    "tracemalloc_peak_gb": 0.756,
+    "useful_bytes_gb": 0.748,
+    "shapes": {
+      "xyz": [
+        3405153,
+        3
+      ],
+      "opacity": [
+        3405153,
+        1
+      ],
+      "scaling": [
+        3405153,
+        3
+      ],
+      "rotation": [
+        3405153,
+        4
+      ],
+      "f_dc": [
+        3405153,
+        3
+      ],
+      "f_rest": [
+        3405153,
+        45
+      ]
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\drjohnson\\point_cloud\\iteration_30000\\point_cloud.ply",
+    "n_gaussians": 3405153,
+    "n_props": 62
+  },
+  {
+    "method": "plyfile_full",
+    "key": "A",
+    "file_mb": 449.9,
+    "wall_s": 3.04,
+    "rss_start_gb": 0.019,
+    "rss_peak_gb": 0.887,
+    "rss_end_gb": 0.034,
+    "peak_over_file": 1.97,
+    "tracemalloc_peak_gb": 0.418,
+    "useful_bytes_gb": 0.418,
+    "shapes": {
+      "xyz": [
+        1902253,
+        3
+      ],
+      "opacity": [
+        1902253,
+        1
+      ],
+      "scaling": [
+        1902253,
+        3
+      ],
+      "rotation": [
+        1902253,
+        4
+      ],
+      "f_dc": [
+        1902253,
+        3
+      ],
+      "f_rest": [
+        1902253,
+        45
+      ]
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\drjohnson\\point_cloud\\iteration_7000\\point_cloud.ply",
+    "n_gaussians": 1902253,
+    "n_props": 62
+  },
+  {
+    "method": "plyfile_only",
+    "key": "B",
+    "file_mb": 449.9,
+    "wall_s": 0.68,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 0.036,
+    "rss_end_gb": 0.034,
+    "peak_over_file": 0.04,
+    "tracemalloc_peak_gb": 0.007,
+    "useful_bytes_gb": 0.439,
+    "shapes": {
+      "count": 1902253,
+      "props": 62
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\drjohnson\\point_cloud\\iteration_7000\\point_cloud.ply",
+    "n_gaussians": 1902253,
+    "n_props": 62
+  },
+  {
+    "method": "numpy_direct",
+    "key": "C",
+    "file_mb": 449.9,
+    "wall_s": 2.61,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 0.894,
+    "rss_end_gb": 0.033,
+    "peak_over_file": 1.99,
+    "tracemalloc_peak_gb": 0.865,
+    "useful_bytes_gb": 0.418,
+    "shapes": {
+      "xyz": [
+        1902253,
+        3
+      ],
+      "opacity": [
+        1902253,
+        1
+      ],
+      "scaling": [
+        1902253,
+        3
+      ],
+      "rotation": [
+        1902253,
+        4
+      ],
+      "f_dc": [
+        1902253,
+        3
+      ],
+      "f_rest": [
+        1902253,
+        45
+      ]
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\drjohnson\\point_cloud\\iteration_7000\\point_cloud.ply",
+    "n_gaussians": 1902253,
+    "n_props": 62
+  },
+  {
+    "method": "numpy_mmap",
+    "key": "D",
+    "file_mb": 449.9,
+    "wall_s": 2.35,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 0.894,
+    "rss_end_gb": 0.033,
+    "peak_over_file": 1.99,
+    "tracemalloc_peak_gb": 0.425,
+    "useful_bytes_gb": 0.418,
+    "shapes": {
+      "xyz": [
+        1902253,
+        3
+      ],
+      "opacity": [
+        1902253,
+        1
+      ],
+      "scaling": [
+        1902253,
+        3
+      ],
+      "rotation": [
+        1902253,
+        4
+      ],
+      "f_dc": [
+        1902253,
+        3
+      ],
+      "f_rest": [
+        1902253,
+        45
+      ]
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\drjohnson\\point_cloud\\iteration_7000\\point_cloud.ply",
+    "n_gaussians": 1902253,
+    "n_props": 62
+  },
+  {
+    "method": "plyfile_full",
+    "key": "A",
+    "file_mb": 602.2,
+    "wall_s": 3.54,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 1.175,
+    "rss_end_gb": 0.033,
+    "peak_over_file": 1.96,
+    "tracemalloc_peak_gb": 0.557,
+    "useful_bytes_gb": 0.56,
+    "shapes": {
+      "xyz": [
+        2546116,
+        3
+      ],
+      "opacity": [
+        2546116,
+        1
+      ],
+      "scaling": [
+        2546116,
+        3
+      ],
+      "rotation": [
+        2546116,
+        4
+      ],
+      "f_dc": [
+        2546116,
+        3
+      ],
+      "f_rest": [
+        2546116,
+        45
+      ]
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\playroom\\point_cloud\\iteration_30000\\point_cloud.ply",
+    "n_gaussians": 2546116,
+    "n_props": 62
+  },
+  {
+    "method": "plyfile_only",
+    "key": "B",
+    "file_mb": 602.2,
+    "wall_s": 0.58,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 0.036,
+    "rss_end_gb": 0.034,
+    "peak_over_file": 0.03,
+    "tracemalloc_peak_gb": 0.007,
+    "useful_bytes_gb": 0.588,
+    "shapes": {
+      "count": 2546116,
+      "props": 62
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\playroom\\point_cloud\\iteration_30000\\point_cloud.ply",
+    "n_gaussians": 2546116,
+    "n_props": 62
+  },
+  {
+    "method": "numpy_direct",
+    "key": "C",
+    "file_mb": 602.2,
+    "wall_s": 3.58,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 1.184,
+    "rss_end_gb": 0.033,
+    "peak_over_file": 1.98,
+    "tracemalloc_peak_gb": 1.155,
+    "useful_bytes_gb": 0.56,
+    "shapes": {
+      "xyz": [
+        2546116,
+        3
+      ],
+      "opacity": [
+        2546116,
+        1
+      ],
+      "scaling": [
+        2546116,
+        3
+      ],
+      "rotation": [
+        2546116,
+        4
+      ],
+      "f_dc": [
+        2546116,
+        3
+      ],
+      "f_rest": [
+        2546116,
+        45
+      ]
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\playroom\\point_cloud\\iteration_30000\\point_cloud.ply",
+    "n_gaussians": 2546116,
+    "n_props": 62
+  },
+  {
+    "method": "numpy_mmap",
+    "key": "D",
+    "file_mb": 602.2,
+    "wall_s": 3.11,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 1.184,
+    "rss_end_gb": 0.033,
+    "peak_over_file": 1.98,
+    "tracemalloc_peak_gb": 0.567,
+    "useful_bytes_gb": 0.56,
+    "shapes": {
+      "xyz": [
+        2546116,
+        3
+      ],
+      "opacity": [
+        2546116,
+        1
+      ],
+      "scaling": [
+        2546116,
+        3
+      ],
+      "rotation": [
+        2546116,
+        4
+      ],
+      "f_dc": [
+        2546116,
+        3
+      ],
+      "f_rest": [
+        2546116,
+        45
+      ]
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\playroom\\point_cloud\\iteration_30000\\point_cloud.ply",
+    "n_gaussians": 2546116,
+    "n_props": 62
+  },
+  {
+    "method": "plyfile_full",
+    "key": "A",
+    "file_mb": 410.3,
+    "wall_s": 2.43,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 0.812,
+    "rss_end_gb": 0.034,
+    "peak_over_file": 1.98,
+    "tracemalloc_peak_gb": 0.382,
+    "useful_bytes_gb": 0.381,
+    "shapes": {
+      "xyz": [
+        1734607,
+        3
+      ],
+      "opacity": [
+        1734607,
+        1
+      ],
+      "scaling": [
+        1734607,
+        3
+      ],
+      "rotation": [
+        1734607,
+        4
+      ],
+      "f_dc": [
+        1734607,
+        3
+      ],
+      "f_rest": [
+        1734607,
+        45
+      ]
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\playroom\\point_cloud\\iteration_7000\\point_cloud.ply",
+    "n_gaussians": 1734607,
+    "n_props": 62
+  },
+  {
+    "method": "plyfile_only",
+    "key": "B",
+    "file_mb": 410.3,
+    "wall_s": 0.53,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 0.036,
+    "rss_end_gb": 0.034,
+    "peak_over_file": 0.04,
+    "tracemalloc_peak_gb": 0.007,
+    "useful_bytes_gb": 0.401,
+    "shapes": {
+      "count": 1734607,
+      "props": 62
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\playroom\\point_cloud\\iteration_7000\\point_cloud.ply",
+    "n_gaussians": 1734607,
+    "n_props": 62
+  },
+  {
+    "method": "numpy_direct",
+    "key": "C",
+    "file_mb": 410.3,
+    "wall_s": 2.05,
+    "rss_start_gb": 0.019,
+    "rss_peak_gb": 0.818,
+    "rss_end_gb": 0.033,
+    "peak_over_file": 1.99,
+    "tracemalloc_peak_gb": 0.789,
+    "useful_bytes_gb": 0.381,
+    "shapes": {
+      "xyz": [
+        1734607,
+        3
+      ],
+      "opacity": [
+        1734607,
+        1
+      ],
+      "scaling": [
+        1734607,
+        3
+      ],
+      "rotation": [
+        1734607,
+        4
+      ],
+      "f_dc": [
+        1734607,
+        3
+      ],
+      "f_rest": [
+        1734607,
+        45
+      ]
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\playroom\\point_cloud\\iteration_7000\\point_cloud.ply",
+    "n_gaussians": 1734607,
+    "n_props": 62
+  },
+  {
+    "method": "numpy_mmap",
+    "key": "D",
+    "file_mb": 410.3,
+    "wall_s": 2.41,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 0.818,
+    "rss_end_gb": 0.033,
+    "peak_over_file": 1.99,
+    "tracemalloc_peak_gb": 0.388,
+    "useful_bytes_gb": 0.381,
+    "shapes": {
+      "xyz": [
+        1734607,
+        3
+      ],
+      "opacity": [
+        1734607,
+        1
+      ],
+      "scaling": [
+        1734607,
+        3
+      ],
+      "rotation": [
+        1734607,
+        4
+      ],
+      "f_dc": [
+        1734607,
+        3
+      ],
+      "f_rest": [
+        1734607,
+        45
+      ]
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\playroom\\point_cloud\\iteration_7000\\point_cloud.ply",
+    "n_gaussians": 1734607,
+    "n_props": 62
+  },
+  {
+    "method": "plyfile_full",
+    "key": "A",
+    "file_mb": 242.8,
+    "wall_s": 1.72,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 0.496,
+    "rss_end_gb": 0.034,
+    "peak_over_file": 2.01,
+    "tracemalloc_peak_gb": 0.229,
+    "useful_bytes_gb": 0.226,
+    "shapes": {
+      "xyz": [
+        1026508,
+        3
+      ],
+      "opacity": [
+        1026508,
+        1
+      ],
+      "scaling": [
+        1026508,
+        3
+      ],
+      "rotation": [
+        1026508,
+        4
+      ],
+      "f_dc": [
+        1026508,
+        3
+      ],
+      "f_rest": [
+        1026508,
+        45
+      ]
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\train\\point_cloud\\iteration_30000\\point_cloud.ply",
+    "n_gaussians": 1026508,
+    "n_props": 62
+  },
+  {
+    "method": "plyfile_only",
+    "key": "B",
+    "file_mb": 242.8,
+    "wall_s": 0.66,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 0.036,
+    "rss_end_gb": 0.034,
+    "peak_over_file": 0.07,
+    "tracemalloc_peak_gb": 0.007,
+    "useful_bytes_gb": 0.237,
+    "shapes": {
+      "count": 1026508,
+      "props": 62
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\train\\point_cloud\\iteration_30000\\point_cloud.ply",
+    "n_gaussians": 1026508,
+    "n_props": 62
+  },
+  {
+    "method": "numpy_direct",
+    "key": "C",
+    "file_mb": 242.8,
+    "wall_s": 1.73,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 0.499,
+    "rss_end_gb": 0.033,
+    "peak_over_file": 2.02,
+    "tracemalloc_peak_gb": 0.47,
+    "useful_bytes_gb": 0.226,
+    "shapes": {
+      "xyz": [
+        1026508,
+        3
+      ],
+      "opacity": [
+        1026508,
+        1
+      ],
+      "scaling": [
+        1026508,
+        3
+      ],
+      "rotation": [
+        1026508,
+        4
+      ],
+      "f_dc": [
+        1026508,
+        3
+      ],
+      "f_rest": [
+        1026508,
+        45
+      ]
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\train\\point_cloud\\iteration_30000\\point_cloud.ply",
+    "n_gaussians": 1026508,
+    "n_props": 62
+  },
+  {
+    "method": "numpy_mmap",
+    "key": "D",
+    "file_mb": 242.8,
+    "wall_s": 1.74,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 0.499,
+    "rss_end_gb": 0.033,
+    "peak_over_file": 2.02,
+    "tracemalloc_peak_gb": 0.233,
+    "useful_bytes_gb": 0.226,
+    "shapes": {
+      "xyz": [
+        1026508,
+        3
+      ],
+      "opacity": [
+        1026508,
+        1
+      ],
+      "scaling": [
+        1026508,
+        3
+      ],
+      "rotation": [
+        1026508,
+        4
+      ],
+      "f_dc": [
+        1026508,
+        3
+      ],
+      "f_rest": [
+        1026508,
+        45
+      ]
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\train\\point_cloud\\iteration_30000\\point_cloud.ply",
+    "n_gaussians": 1026508,
+    "n_props": 62
+  },
+  {
+    "method": "plyfile_full",
+    "key": "A",
+    "file_mb": 132.3,
+    "wall_s": 1.55,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 0.287,
+    "rss_end_gb": 0.034,
+    "peak_over_file": 2.07,
+    "tracemalloc_peak_gb": 0.128,
+    "useful_bytes_gb": 0.123,
+    "shapes": {
+      "xyz": [
+        559263,
+        3
+      ],
+      "opacity": [
+        559263,
+        1
+      ],
+      "scaling": [
+        559263,
+        3
+      ],
+      "rotation": [
+        559263,
+        4
+      ],
+      "f_dc": [
+        559263,
+        3
+      ],
+      "f_rest": [
+        559263,
+        45
+      ]
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\train\\point_cloud\\iteration_7000\\point_cloud.ply",
+    "n_gaussians": 559263,
+    "n_props": 62
+  },
+  {
+    "method": "plyfile_only",
+    "key": "B",
+    "file_mb": 132.3,
+    "wall_s": 0.65,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 0.036,
+    "rss_end_gb": 0.034,
+    "peak_over_file": 0.12,
+    "tracemalloc_peak_gb": 0.007,
+    "useful_bytes_gb": 0.129,
+    "shapes": {
+      "count": 559263,
+      "props": 62
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\train\\point_cloud\\iteration_7000\\point_cloud.ply",
+    "n_gaussians": 559263,
+    "n_props": 62
+  },
+  {
+    "method": "numpy_direct",
+    "key": "C",
+    "file_mb": 132.3,
+    "wall_s": 1.09,
+    "rss_start_gb": 0.019,
+    "rss_peak_gb": 0.288,
+    "rss_end_gb": 0.033,
+    "peak_over_file": 2.08,
+    "tracemalloc_peak_gb": 0.259,
+    "useful_bytes_gb": 0.123,
+    "shapes": {
+      "xyz": [
+        559263,
+        3
+      ],
+      "opacity": [
+        559263,
+        1
+      ],
+      "scaling": [
+        559263,
+        3
+      ],
+      "rotation": [
+        559263,
+        4
+      ],
+      "f_dc": [
+        559263,
+        3
+      ],
+      "f_rest": [
+        559263,
+        45
+      ]
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\train\\point_cloud\\iteration_7000\\point_cloud.ply",
+    "n_gaussians": 559263,
+    "n_props": 62
+  },
+  {
+    "method": "numpy_mmap",
+    "key": "D",
+    "file_mb": 132.3,
+    "wall_s": 1.25,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 0.289,
+    "rss_end_gb": 0.033,
+    "peak_over_file": 2.08,
+    "tracemalloc_peak_gb": 0.13,
+    "useful_bytes_gb": 0.123,
+    "shapes": {
+      "xyz": [
+        559263,
+        3
+      ],
+      "opacity": [
+        559263,
+        1
+      ],
+      "scaling": [
+        559263,
+        3
+      ],
+      "rotation": [
+        559263,
+        4
+      ],
+      "f_dc": [
+        559263,
+        3
+      ],
+      "f_rest": [
+        559263,
+        45
+      ]
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\train\\point_cloud\\iteration_7000\\point_cloud.ply",
+    "n_gaussians": 559263,
+    "n_props": 62
+  },
+  {
+    "method": "plyfile_full",
+    "key": "A",
+    "file_mb": 601.0,
+    "wall_s": 3.43,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 1.173,
+    "rss_end_gb": 0.033,
+    "peak_over_file": 1.97,
+    "tracemalloc_peak_gb": 0.556,
+    "useful_bytes_gb": 0.559,
+    "shapes": {
+      "xyz": [
+        2541226,
+        3
+      ],
+      "opacity": [
+        2541226,
+        1
+      ],
+      "scaling": [
+        2541226,
+        3
+      ],
+      "rotation": [
+        2541226,
+        4
+      ],
+      "f_dc": [
+        2541226,
+        3
+      ],
+      "f_rest": [
+        2541226,
+        45
+      ]
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\truck\\point_cloud\\iteration_30000\\point_cloud.ply",
+    "n_gaussians": 2541226,
+    "n_props": 62
+  },
+  {
+    "method": "plyfile_only",
+    "key": "B",
+    "file_mb": 601.0,
+    "wall_s": 0.56,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 0.036,
+    "rss_end_gb": 0.033,
+    "peak_over_file": 0.03,
+    "tracemalloc_peak_gb": 0.007,
+    "useful_bytes_gb": 0.587,
+    "shapes": {
+      "count": 2541226,
+      "props": 62
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\truck\\point_cloud\\iteration_30000\\point_cloud.ply",
+    "n_gaussians": 2541226,
+    "n_props": 62
+  },
+  {
+    "method": "numpy_direct",
+    "key": "C",
+    "file_mb": 601.0,
+    "wall_s": 3.2,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 1.182,
+    "rss_end_gb": 0.033,
+    "peak_over_file": 1.98,
+    "tracemalloc_peak_gb": 1.153,
+    "useful_bytes_gb": 0.559,
+    "shapes": {
+      "xyz": [
+        2541226,
+        3
+      ],
+      "opacity": [
+        2541226,
+        1
+      ],
+      "scaling": [
+        2541226,
+        3
+      ],
+      "rotation": [
+        2541226,
+        4
+      ],
+      "f_dc": [
+        2541226,
+        3
+      ],
+      "f_rest": [
+        2541226,
+        45
+      ]
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\truck\\point_cloud\\iteration_30000\\point_cloud.ply",
+    "n_gaussians": 2541226,
+    "n_props": 62
+  },
+  {
+    "method": "numpy_mmap",
+    "key": "D",
+    "file_mb": 601.0,
+    "wall_s": 3.38,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 1.182,
+    "rss_end_gb": 0.033,
+    "peak_over_file": 1.98,
+    "tracemalloc_peak_gb": 0.566,
+    "useful_bytes_gb": 0.559,
+    "shapes": {
+      "xyz": [
+        2541226,
+        3
+      ],
+      "opacity": [
+        2541226,
+        1
+      ],
+      "scaling": [
+        2541226,
+        3
+      ],
+      "rotation": [
+        2541226,
+        4
+      ],
+      "f_dc": [
+        2541226,
+        3
+      ],
+      "f_rest": [
+        2541226,
+        45
+      ]
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\truck\\point_cloud\\iteration_30000\\point_cloud.ply",
+    "n_gaussians": 2541226,
+    "n_props": 62
+  },
+  {
+    "method": "plyfile_full",
+    "key": "A",
+    "file_mb": 409.7,
+    "wall_s": 2.48,
+    "rss_start_gb": 0.019,
+    "rss_peak_gb": 0.811,
+    "rss_end_gb": 0.034,
+    "peak_over_file": 1.98,
+    "tracemalloc_peak_gb": 0.382,
+    "useful_bytes_gb": 0.381,
+    "shapes": {
+      "xyz": [
+        1732378,
+        3
+      ],
+      "opacity": [
+        1732378,
+        1
+      ],
+      "scaling": [
+        1732378,
+        3
+      ],
+      "rotation": [
+        1732378,
+        4
+      ],
+      "f_dc": [
+        1732378,
+        3
+      ],
+      "f_rest": [
+        1732378,
+        45
+      ]
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\truck\\point_cloud\\iteration_7000\\point_cloud.ply",
+    "n_gaussians": 1732378,
+    "n_props": 62
+  },
+  {
+    "method": "plyfile_only",
+    "key": "B",
+    "file_mb": 409.7,
+    "wall_s": 0.59,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 0.037,
+    "rss_end_gb": 0.033,
+    "peak_over_file": 0.04,
+    "tracemalloc_peak_gb": 0.007,
+    "useful_bytes_gb": 0.4,
+    "shapes": {
+      "count": 1732378,
+      "props": 62
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\truck\\point_cloud\\iteration_7000\\point_cloud.ply",
+    "n_gaussians": 1732378,
+    "n_props": 62
+  },
+  {
+    "method": "numpy_direct",
+    "key": "C",
+    "file_mb": 409.7,
+    "wall_s": 2.12,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 0.817,
+    "rss_end_gb": 0.033,
+    "peak_over_file": 1.99,
+    "tracemalloc_peak_gb": 0.788,
+    "useful_bytes_gb": 0.381,
+    "shapes": {
+      "xyz": [
+        1732378,
+        3
+      ],
+      "opacity": [
+        1732378,
+        1
+      ],
+      "scaling": [
+        1732378,
+        3
+      ],
+      "rotation": [
+        1732378,
+        4
+      ],
+      "f_dc": [
+        1732378,
+        3
+      ],
+      "f_rest": [
+        1732378,
+        45
+      ]
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\truck\\point_cloud\\iteration_7000\\point_cloud.ply",
+    "n_gaussians": 1732378,
+    "n_props": 62
+  },
+  {
+    "method": "numpy_mmap",
+    "key": "D",
+    "file_mb": 409.7,
+    "wall_s": 2.05,
+    "rss_start_gb": 0.02,
+    "rss_peak_gb": 0.817,
+    "rss_end_gb": 0.033,
+    "peak_over_file": 1.99,
+    "tracemalloc_peak_gb": 0.388,
+    "useful_bytes_gb": 0.381,
+    "shapes": {
+      "xyz": [
+        1732378,
+        3
+      ],
+      "opacity": [
+        1732378,
+        1
+      ],
+      "scaling": [
+        1732378,
+        3
+      ],
+      "rotation": [
+        1732378,
+        4
+      ],
+      "f_dc": [
+        1732378,
+        3
+      ],
+      "f_rest": [
+        1732378,
+        45
+      ]
+    },
+    "error": null,
+    "file": "datasets/pretrained/models\\truck\\point_cloud\\iteration_7000\\point_cloud.ply",
+    "n_gaussians": 1732378,
+    "n_props": 62
+  }
+]

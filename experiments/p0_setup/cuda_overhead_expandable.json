@@ -1,0 +1,32 @@
+{
+  "gpu": "NVIDIA GeForce GTX 1650 Ti",
+  "driver": "560.70",
+  "vram_total_mb": 4096.0,
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "in_wsl": true,
+  "ts": "2026-09-02T16:05:00",
+  "alloc_conf": "expandable_segments:True",
+  "baseline_used_mb": 161.0,
+  "torch": "2.14.0+cu126",
+  "torch_cuda": "12.6",
+  "sm": "7.5",
+  "torch_total_mb": 4095.7,
+  "cuda_context_mb": 62.5,
+  "cuda_context_init_s": 0.38,
+  "cublas_extra_mb": 32.0,
+  "fixed_overhead_mb": 92.5,
+  "usable_estimate_mb": 3842.5,
+  "bandwidth_vram_gbs": 38.3,
+  "nvml_peak_mb": 3693.5,
+  "nvml_plateau_at_alloc_mb": null,
+  "bandwidth_collapse_at_alloc_mb": null,
+  "host_spill_observed": false,
+  "true_vram_ceiling_mb": 3440.0,
+  "gaussian_budget": {
+    "inference (params, SH3)": 15284328,
+    "fine-tune SH3 (p+g+2\u00b7Adam+stats)": 3773118,
+    "fine-tune SH2": 5817905,
+    "fine-tune SH1": 9492372,
+    "prune TR\u01af\u1edaC training_setup (A12)": 15029589
+  }
+}

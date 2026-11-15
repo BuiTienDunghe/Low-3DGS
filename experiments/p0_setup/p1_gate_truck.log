@@ -1,0 +1,80 @@
+run_id=p1_smoke_truck_r1_cpu_20260903-134507  scene=truck  res=1  data_device=cpu  date=2026-09-03T13:45:07+00:00
+n_gaussians=2541226
+n_images=251  sample_dims=72x72
+model=/mnt/d/low-3DGS/datasets/pretrained/models/truck
+src=/mnt/d/low-3DGS/datasets/tandt/truck
+git_gs=e971ea4
+torch=2.14.0+cu126 12.6
+--- free -g (WSL) ---
+               total        used        free      shared  buff/cache   available
+Mem:               9           0           8           0           0           9
+Swap:              4           0           4
+--- nvidia-smi (phai ~0 MiB) ---
+12 MiB, 51
+--- ply size ---
+-rwxrwxrwx 1 dungbui dungbui 630225580 Sep  2 10:25 /mnt/d/low-3DGS/datasets/pretrained/models/truck/point_cloud/iteration_30000/point_cloud.ply
+
+===== [A] render.py  (skip_train, res=1, data_device=cpu) =====
+{
+  "type": "footer",
+  "samples": 92,
+  "wall_s": 47.63,
+  "peak": {
+    "vram_used_mb": 1901.4,
+    "proc_rss_gb": 5.264,
+    "temp_c": 63,
+    "min_clock_sm_mhz": 300
+  }
+}
+render.py exit=0
+Rendering /mnt/d/low-3DGS/datasets/pretrained/models/truck
+Rendering progress:   0%|          | 0/32 [00:00<?, ?it/s]Rendering progress:   3%|▎         | 1/32 [00:00<00:18,  1.65it/s]Rendering progress:   6%|▋         | 2/32 [00:01<00:15,  1.99it/s]Rendering progress:   9%|▉         | 3/32 [00:01<00:13,  2.09it/s]Rendering progress:  12%|█▎        | 4/32 [00:02<00:14,  1.94it/s]Rendering progress:  16%|█▌        | 5/32 [00:02<00:13,  2.01it/s]Rendering progress:  19%|█▉        | 6/32 [00:02<00:12,  2.08it/s]Rendering progress:  22%|██▏       | 7/32 [00:03<00:11,  2.12it/s]Rendering progress:  25%|██▌       | 8/32 [00:03<00:11,  2.07it/s]Rendering progress:  28%|██▊       | 9/32 [00:04<00:11,  2.07it/s]Rendering progress:  31%|███▏      | 10/32 [00:05<00:11,  1.89it/s]Rendering progress:  34%|███▍      | 11/32 [00:05<00:10,  2.03it/s]Rendering progress:  38%|███▊      | 12/32 [00:05<00:09,  2.10it/s]Rendering progress:  41%|████      | 13/32 [00:06<00:08,  2.18it/s]Rendering progress:  44%|████▍     | 14/32 [00:06<00:07,  2.26it/s]Rendering progress:  47%|████▋     | 15/32 [00:07<00:07,  2.28it/s]Rendering progress:  50%|█████     | 16/32 [00:07<00:07,  2.27it/s]Rendering progress:  53%|█████▎    | 17/32 [00:08<00:06,  2.26it/s]Rendering progress:  56%|█████▋    | 18/32 [00:08<00:06,  2.22it/s]Rendering progress:  59%|█████▉    | 19/32 [00:09<00:06,  2.13it/s]Rendering progress:  62%|██████▎   | 20/32 [00:09<00:05,  2.11it/s]Rendering progress:  66%|██████▌   | 21/32 [00:09<00:05,  2.11it/s]Rendering progress:  69%|██████▉   | 22/32 [00:10<00:05,  1.92it/s]Rendering progress:  72%|███████▏  | 23/32 [00:11<00:04,  2.03it/s]Rendering progress:  75%|███████▌  | 24/32 [00:11<00:03,  2.10it/s]Rendering progress:  78%|███████▊  | 25/32 [00:11<00:03,  2.13it/s]Rendering progress:  81%|████████▏ | 26/32 [00:12<00:02,  2.17it/s]Rendering progress:  84%|████████▍ | 27/32 [00:12<00:02,  2.15it/s]Rendering progress:  88%|████████▊ | 28/32 [00:13<00:02,  1.95it/s]Rendering progress:  91%|█████████ | 29/32 [00:13<00:01,  2.01it/s]Rendering progress:  94%|█████████▍| 30/32 [00:16<00:01,  1.00it/s]Rendering progress: 100%|██████████| 32/32 [00:15<00:00,  2.10it/s]
+FPS progress:   0%|          | 0/96 [00:00<?, ?it/s]FPS progress:   1%|          | 1/96 [00:00<00:50,  1.87it/s]FPS progress:   4%|▍         | 4/96 [00:00<00:12,  7.29it/s]FPS progress:   7%|▋         | 7/96 [00:00<00:07, 11.50it/s]FPS progress:  10%|█         | 10/96 [00:00<00:05, 14.65it/s]FPS progress:  14%|█▎        | 13/96 [00:01<00:04, 17.40it/s]FPS progress:  17%|█▋        | 16/96 [00:01<00:04, 19.23it/s]FPS progress:  20%|█▉        | 19/96 [00:01<00:03, 20.64it/s]FPS progress:  23%|██▎       | 22/96 [00:01<00:03, 21.69it/s]FPS progress:  26%|██▌       | 25/96 [00:01<00:03, 22.70it/s]FPS progress:  29%|██▉       | 28/96 [00:01<00:02, 23.11it/s]FPS progress:  32%|███▏      | 31/96 [00:01<00:02, 23.23it/s]FPS progress:  35%|███▌      | 34/96 [00:01<00:02, 23.43it/s]FPS progress:  39%|███▊      | 37/96 [00:02<00:02, 23.19it/s]FPS progress:  42%|████▏     | 40/96 [00:02<00:02, 22.97it/s]FPS progress:  45%|████▍     | 43/96 [00:02<00:02, 23.19it/s]FPS progress:  48%|████▊     | 46/96 [00:02<00:02, 23.53it/s]FPS progress:  51%|█████     | 49/96 [00:02<00:01, 23.73it/s]FPS progress:  54%|█████▍    | 52/96 [00:02<00:01, 23.60it/s]FPS progress:  57%|█████▋    | 55/96 [00:02<00:01, 23.99it/s]FPS progress:  60%|██████    | 58/96 [00:02<00:01, 24.30it/s]FPS progress:  64%|██████▎   | 61/96 [00:03<00:01, 24.03it/s]FPS progress:  67%|██████▋   | 64/96 [00:03<00:01, 24.00it/s]FPS progress:  70%|██████▉   | 67/96 [00:03<00:01, 23.75it/s]FPS progress:  73%|███████▎  | 70/96 [00:03<00:01, 23.34it/s]FPS progress:  76%|███████▌  | 73/96 [00:03<00:00, 23.18it/s]FPS progress:  79%|███████▉  | 76/96 [00:03<00:00, 23.64it/s]FPS progress:  82%|████████▏ | 79/96 [00:03<00:00, 23.60it/s]FPS progress:  85%|████████▌ | 82/96 [00:03<00:00, 23.80it/s]FPS progress:  89%|████████▊ | 85/96 [00:04<00:00, 23.70it/s]FPS progress:  92%|█████████▏| 88/96 [00:04<00:00, 24.13it/s]FPS progress:  95%|█████████▍| 91/96 [00:04<00:00, 24.36it/s]FPS progress:  98%|█████████▊| 94/96 [00:04<00:00, 23.97it/s]FPS progress: 100%|██████████| 96/96 [00:04<00:00, 21.21it/s]
+
+===== [B] metrics.py =====
+{
+  "type": "footer",
+  "samples": 151,
+  "wall_s": 76.59,
+  "peak": {
+    "vram_used_mb": 1479.4,
+    "proc_rss_gb": 2.104,
+    "temp_c": 67,
+    "min_clock_sm_mhz": 300
+  }
+}
+metrics.py exit=0
+  SSIM :    0.8756190
+  PSNR :   24.9926777
+  LPIPS:    0.1512987
+
+===== TOM TAT =====
+--- render ---
+{
+  "samples": 92,
+  "wall_s": 47.6,
+  "vram_peak_mb": 1901.4,
+  "vram_mean_mb": 981.7,
+  "rss_peak_gb": 5.264,
+  "temp_peak_c": 63,
+  "clock_min_mhz": 300,
+  "clock_max_mhz": 2100,
+  "throttled_frac": 0.109,
+  "clock_min_frac_of_max": 0.143
+}
+--- metrics ---
+{
+  "samples": 151,
+  "wall_s": 76.6,
+  "vram_peak_mb": 1479.4,
+  "vram_mean_mb": 1314.2,
+  "rss_peak_gb": 2.104,
+  "temp_peak_c": 67,
+  "clock_min_mhz": 300,
+  "clock_max_mhz": 2100,
+  "throttled_frac": 0.146,
+  "clock_min_frac_of_max": 0.143
+}
+
+Ket qua o: /mnt/d/low-3DGS/experiments/p1_smoke_truck_r1_cpu_20260903-134507
+GATE: kiem tra  rss_peak_gb < 9  ·  vram_peak_mb  ·  PSNR vs paper  -> ghi vao docs/05_EXPERIMENTS.md (EXP-001)

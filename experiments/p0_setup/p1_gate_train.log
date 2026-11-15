@@ -1,0 +1,80 @@
+run_id=p1_smoke_train_r1_cpu_20260902-190359  scene=train  res=1  data_device=cpu  date=2026-09-02T19:03:59+00:00
+n_gaussians=1026508
+n_images=301  sample_dims=72x72
+model=/mnt/d/low-3DGS/datasets/pretrained/models/train
+src=/mnt/d/low-3DGS/datasets/tandt/train
+git_gs=e971ea4
+torch=2.14.0+cu126 12.6
+--- free -g (WSL) ---
+               total        used        free      shared  buff/cache   available
+Mem:               9           0           8           0           0           9
+Swap:              4           0           4
+--- nvidia-smi (phai ~0 MiB) ---
+0 MiB, 54
+--- ply size ---
+-rwxrwxrwx 1 dungbui dungbui 254575516 Sep  2 10:25 /mnt/d/low-3DGS/datasets/pretrained/models/train/point_cloud/iteration_30000/point_cloud.ply
+
+===== [A] render.py  (skip_train, res=1, data_device=cpu) =====
+{
+  "type": "footer",
+  "samples": 91,
+  "wall_s": 46.9,
+  "peak": {
+    "vram_used_mb": 1069.5,
+    "proc_rss_gb": 4.476,
+    "temp_c": 63,
+    "min_clock_sm_mhz": 300
+  }
+}
+render.py exit=0
+Rendering /mnt/d/low-3DGS/datasets/pretrained/models/train
+Rendering progress:   0%|          | 0/38 [00:00<?, ?it/s]Rendering progress:   3%|▎         | 1/38 [00:00<00:21,  1.74it/s]Rendering progress:   5%|▌         | 2/38 [00:00<00:17,  2.07it/s]Rendering progress:   8%|▊         | 3/38 [00:01<00:16,  2.19it/s]Rendering progress:  11%|█         | 4/38 [00:01<00:15,  2.24it/s]Rendering progress:  13%|█▎        | 5/38 [00:02<00:15,  2.10it/s]Rendering progress:  16%|█▌        | 6/38 [00:02<00:14,  2.15it/s]Rendering progress:  18%|█▊        | 7/38 [00:03<00:14,  2.19it/s]Rendering progress:  21%|██        | 8/38 [00:03<00:13,  2.20it/s]Rendering progress:  24%|██▎       | 9/38 [00:04<00:13,  2.16it/s]Rendering progress:  26%|██▋       | 10/38 [00:04<00:13,  2.05it/s]Rendering progress:  29%|██▉       | 11/38 [00:05<00:13,  1.93it/s]Rendering progress:  32%|███▏      | 12/38 [00:05<00:13,  1.88it/s]Rendering progress:  34%|███▍      | 13/38 [00:06<00:12,  2.02it/s]Rendering progress:  37%|███▋      | 14/38 [00:06<00:11,  2.10it/s]Rendering progress:  39%|███▉      | 15/38 [00:07<00:10,  2.17it/s]Rendering progress:  42%|████▏     | 16/38 [00:07<00:09,  2.22it/s]Rendering progress:  45%|████▍     | 17/38 [00:08<00:10,  2.09it/s]Rendering progress:  47%|████▋     | 18/38 [00:08<00:10,  2.00it/s]Rendering progress:  50%|█████     | 19/38 [00:09<00:09,  1.96it/s]Rendering progress:  53%|█████▎    | 20/38 [00:09<00:09,  1.95it/s]Rendering progress:  55%|█████▌    | 21/38 [00:10<00:08,  2.08it/s]Rendering progress:  58%|█████▊    | 22/38 [00:10<00:07,  2.16it/s]Rendering progress:  61%|██████    | 23/38 [00:10<00:06,  2.19it/s]Rendering progress:  63%|██████▎   | 24/38 [00:11<00:06,  2.20it/s]Rendering progress:  66%|██████▌   | 25/38 [00:11<00:05,  2.18it/s]Rendering progress:  68%|██████▊   | 26/38 [00:12<00:05,  2.13it/s]Rendering progress:  71%|███████   | 27/38 [00:12<00:05,  2.08it/s]Rendering progress:  74%|███████▎  | 28/38 [00:13<00:04,  2.04it/s]Rendering progress:  76%|███████▋  | 29/38 [00:13<00:04,  2.01it/s]Rendering progress:  79%|███████▉  | 30/38 [00:14<00:04,  1.89it/s]Rendering progress:  82%|████████▏ | 31/38 [00:15<00:03,  1.88it/s]Rendering progress:  84%|████████▍ | 32/38 [00:15<00:03,  1.89it/s]Rendering progress:  87%|████████▋ | 33/38 [00:16<00:02,  2.03it/s]Rendering progress:  89%|████████▉ | 34/38 [00:16<00:01,  2.09it/s]Rendering progress:  92%|█████████▏| 35/38 [00:16<00:01,  2.14it/s]Rendering progress:  95%|█████████▍| 36/38 [00:17<00:00,  2.24it/s]Rendering progress:  97%|█████████▋| 37/38 [00:17<00:00,  2.22it/s]Rendering progress: 100%|██████████| 38/38 [00:18<00:00,  2.23it/s]Rendering progress: 100%|██████████| 38/38 [00:18<00:00,  2.09it/s]
+FPS progress:   0%|          | 0/114 [00:00<?, ?it/s]FPS progress:   1%|          | 1/114 [00:00<00:55,  2.04it/s]FPS progress:   4%|▍         | 5/114 [00:00<00:10, 10.28it/s]FPS progress:   8%|▊         | 9/114 [00:00<00:06, 16.71it/s]FPS progress:  11%|█▏        | 13/114 [00:00<00:04, 20.90it/s]FPS progress:  15%|█▍        | 17/114 [00:00<00:03, 24.68it/s]FPS progress:  18%|█▊        | 21/114 [00:01<00:03, 28.03it/s]FPS progress:  22%|██▏       | 25/114 [00:01<00:02, 30.47it/s]FPS progress:  25%|██▌       | 29/114 [00:01<00:02, 30.93it/s]FPS progress:  29%|██▉       | 33/114 [00:01<00:02, 32.57it/s]FPS progress:  32%|███▏      | 37/114 [00:01<00:02, 33.75it/s]FPS progress:  36%|███▌      | 41/114 [00:01<00:02, 33.62it/s]FPS progress:  39%|███▉      | 45/114 [00:01<00:01, 34.64it/s]FPS progress:  43%|████▎     | 49/114 [00:01<00:01, 33.28it/s]FPS progress:  46%|████▋     | 53/114 [00:02<00:01, 33.56it/s]FPS progress:  50%|█████     | 57/114 [00:02<00:01, 34.16it/s]FPS progress:  54%|█████▎    | 61/114 [00:02<00:01, 34.74it/s]FPS progress:  57%|█████▋    | 65/114 [00:02<00:01, 34.73it/s]FPS progress:  61%|██████    | 69/114 [00:02<00:01, 34.16it/s]FPS progress:  64%|██████▍   | 73/114 [00:02<00:01, 35.61it/s]FPS progress:  68%|██████▊   | 77/114 [00:02<00:01, 34.99it/s]FPS progress:  71%|███████   | 81/114 [00:02<00:00, 35.17it/s]FPS progress:  75%|███████▍  | 85/114 [00:02<00:00, 34.96it/s]FPS progress:  78%|███████▊  | 89/114 [00:03<00:00, 33.60it/s]FPS progress:  82%|████████▏ | 93/114 [00:03<00:00, 33.78it/s]FPS progress:  85%|████████▌ | 97/114 [00:03<00:00, 34.74it/s]FPS progress:  89%|████████▊ | 101/114 [00:03<00:00, 35.31it/s]FPS progress:  92%|█████████▏| 105/114 [00:03<00:00, 34.19it/s]FPS progress:  96%|█████████▌| 109/114 [00:03<00:00, 34.94it/s]FPS progress:  99%|█████████▉| 113/114 [00:03<00:00, 35.44it/s]FPS progress: 100%|██████████| 114/114 [00:03<00:00, 30.44it/s]
+
+===== [B] metrics.py =====
+{
+  "type": "footer",
+  "samples": 191,
+  "wall_s": 96.48,
+  "peak": {
+    "vram_used_mb": 1547.5,
+    "proc_rss_gb": 2.1,
+    "temp_c": 67,
+    "min_clock_sm_mhz": 300
+  }
+}
+metrics.py exit=0
+  SSIM :    0.8076466
+  PSNR :   21.7869816
+  LPIPS:    0.2143095
+
+===== TOM TAT =====
+--- render ---
+{
+  "samples": 91,
+  "wall_s": 46.9,
+  "vram_peak_mb": 1069.5,
+  "vram_mean_mb": 635.4,
+  "rss_peak_gb": 4.476,
+  "temp_peak_c": 63,
+  "clock_min_mhz": 300,
+  "clock_max_mhz": 2100,
+  "throttled_frac": 0.868,
+  "clock_min_frac_of_max": 0.143
+}
+--- metrics ---
+{
+  "samples": 191,
+  "wall_s": 96.5,
+  "vram_peak_mb": 1547.5,
+  "vram_mean_mb": 1324.0,
+  "rss_peak_gb": 2.1,
+  "temp_peak_c": 67,
+  "clock_min_mhz": 300,
+  "clock_max_mhz": 2100,
+  "throttled_frac": 0.927,
+  "clock_min_frac_of_max": 0.143
+}
+
+Ket qua o: /mnt/d/low-3DGS/experiments/p1_smoke_train_r1_cpu_20260902-190359
+GATE: kiem tra  rss_peak_gb < 9  ·  vram_peak_mb  ·  PSNR vs paper  -> ghi vao docs/05_EXPERIMENTS.md (EXP-001)

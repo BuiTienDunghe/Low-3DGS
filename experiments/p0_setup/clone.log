@@ -1,0 +1,17 @@
+[09:37:26] git: git version 2.43.0
+Submodule path 'submodules/fused-ssim': checked out '1272e21a282342e89537159e4bad508b19b34157'
+Submodule path 'submodules/simple-knn': checked out '86710c2d4b46680c02301765dd79e465819c8f19'
+ * branch            5c46b9c07008ae65cb81ab79cd677ecc1934b903 -> FETCH_HEAD
+Submodule path 'submodules/compress-diff-gaussian-rasterization/third_party/glm': checked out '5c46b9c07008ae65cb81ab79cd677ecc1934b903'
+[09:38:15] sizes:
+223M	gaussian-splatting
+32M	LightGaussian
+submodules (gaussian-splatting):
+diff-gaussian-rasterization
+fused-ssim
+simple-knn
+submodules (LightGaussian):
+compress-diff-gaussian-rasterization
+simple-knn
+[09:38:15] DONE
+exit=0
